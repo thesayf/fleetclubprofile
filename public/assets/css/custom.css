@@ -1,0 +1,265 @@
+.tc {text-align: center;}
+.tl {text-align: left;}
+.ib {display: inline-block;}
+.m-5 {margin: 5px}
+.bord {border: 1px solid #d7d7d7;}
+.bord-picked {border: 1px solid green;}
+.pad-5 {padding: 5px;}
+.has-error input::-webkit-input-placeholder {
+   	color: #a94442;
+}
+.ui-timepicker-disabled {display: none;}
+.auto-marg {margin: 0 auto !important;}
+.item-in {font-size: 16px !important;}
+.plus-minus {
+    cursor: pointer;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari*/
+     -khtml-user-select: none; /* Konqueror */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.has-error input:-moz-placeholder { /* Firefox 18- */
+   color: #a94442;
+}
+
+.has-error input::-moz-placeholder {  /* Firefox 19+ */
+   color: #a94442;
+}
+
+.has-error input:-ms-input-placeholder {
+   color: #a94442;
+}
+
+.error-placeholder {
+	color: #a94442 !important;
+}
+
+.success-placeholder {
+	color: #3c763d !important;
+}
+
+.has-success input::-webkit-input-placeholder {
+   	color: green;
+}
+
+.has-success input:-moz-placeholder { /* Firefox 18- */
+   color: green;
+}
+
+.has-success input::-moz-placeholder {  /* Firefox 19+ */
+   color: green;
+}
+
+.has-success input:-ms-input-placeholder {
+   color: green;
+}
+
+.no-pad-l{
+    padding-left: 0px !important;
+}
+
+.slider.slider-horizontal {width: 130px;}
+
+.spin-img {margin: 30px 0;}
+
+.deposit-price {
+    font-weight: 700 !important;
+    color: #b12704 !important;
+}
+
+/*
+#orderIdBox {
+    width: 406px;
+    padding: 36px 0 0 0;
+}
+*/
+#orderIdBox h2 {
+    font-size: 15px;
+}
+
+
+.panel-color {
+ background-color: aqua;
+ padding-top: 20px;
+}
+
+.datetimepicker {
+  z-index: 1000;
+}
+
+@media only screen and (max-width: 1199px) {
+    /* For mobile phones: */
+    #review-body div.pricing-table-title {
+      font-size: 16px;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+    }
+
+    #review-body div.pricing-table-price span.value {
+      font-size: 60px;
+      line-height: 40px;
+      letter-spacing: -3px;
+    }
+
+    #review-body div.pricing-table-description {
+      color: #858585;
+      margin-bottom: 10px;
+    }
+
+    #review-body div.pricing-table-price {
+      padding: 0 0 20px;
+      color: #525252;
+    }
+}
+
+
+
+@media only screen and (max-width: 1199px) {
+
+
+        .setp5 {
+  padding-bottom: 90px;
+}
+.setp5 .thanksContent {
+  border: 5px solid #f0f0f0;
+  padding: 50px 30px;
+}
+.setp5 .thanksContent h2 {
+  display: block;
+  text-align: center;
+  text-transform: capitalize;
+  font-weight: 700;
+  margin-bottom: 55px;
+}
+@media (min-width: 480px) {
+  .setp5 .thanksContent h2 {
+    font-size: 26px;
+  }
+}
+@media (min-width: 768px) {
+  .setp5 .thanksContent h2 {
+    font-size: 30px;
+  }
+}
+.setp5 .thanksContent h2 small {
+  display: block;
+  margin-top: 14px;
+  font-size: 14px;
+}
+.setp5 .thanksContent h3 {
+  color: #252525;
+}
+.setp5 .thanksContent .thanksInner {
+  padding: 30px;
+  min-height: 214px;
+  border: 3px solid #f0f0f0;
+}
+.setp5 .thanksContent .thanksInner .tableBlcok {
+  display: table;
+  height: 154px;
+}
+.setp5 .thanksContent .thanksInner .tableBlcok address {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: left;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 30px;
+}
+.setp5 .thanksContent .thanksInner .tableBlcok address span {
+  font-weight: 400;
+}
+.setp5 .thanksContent .thanksInner .tableBlcok address a {
+  color: #252525;
+  text-decoration: none;
+}
+
+
+.setp5 .thanksContent .thanksInner .well {
+  background-color: #47bac1;
+  border: none;
+  float: right;
+  border-radius: 0;
+  margin-bottom: 0;
+  text-align: center;
+  height: 154px;
+  padding: 50px 0 0 0;
+}
+@media (max-width: 479px) {
+  .setp5 .thanksContent .thanksInner .well {
+    width: 100%;
+  }
+}
+@media (min-width: 480px) {
+  .setp5 .thanksContent .thanksInner .well {
+    width: 100%;
+  }
+}
+@media (min-width: 768px) {
+  .setp5 .thanksContent .thanksInner .well {
+    width: 250px;
+  }
+}
+.setp5 .thanksContent .thanksInner .well h2 {
+  color: #ffffff;
+  font-weight: 700;
+  margin-bottom: 0;
+}
+.setp5 .thanksContent .thanksInner .well h2 small {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 15px;
+  margin: 0 0 13px 0;
+}
+
+        .rev-border{
+        padding-top: 0px !important;
+
+    }
+
+        .inv-no-border{
+
+        padding-top: 0px !important;
+
+
+
+
+}
+
+.pbs-margin{
+
+        padding-top: 20px;
+    }
+
+}
+
+.pac-container {
+    z-index: 1051 !important;
+}
+
+.mtn{
+        margin-top: 30px;
+        color: white;
+    }
+
+.mtnhy{
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+.growl {
+  opacity: 1 !important;
+}
+
+#job-date-picker {
+  cursor: pointer;
+}
+
+.ui-timepicker-input {
+  cursor: pointer;
+}

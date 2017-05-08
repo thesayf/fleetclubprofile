@@ -1,0 +1,283 @@
+<div navi></div>
+
+<div class="am-content">
+  <aside class="page-aside">
+    <div id="am-scroll" class="am-scroller nano">
+      <div class="nano-content">
+        <div class="content">
+          <div class="user-profile col-md-12 col-sm-12 no-pad-l">
+            <div class=" info-block panel panel-default">
+              <table class="no-border no-strip skills">
+                <tbody class="no-border-x no-border-y">
+                  <tr>
+
+                    <td>
+
+                      <button id="add-inventory-button" data-toggle="modal" data-target="#inv-fullWidth" type="button" class="col-xs-12 btn btn-space btn-success btn-rounded pull-right"><i class="icon icon-left s7-box2"></i> Choose Vehicle type <span ng-if="dashInstant.vanType" class="badge badge-primary" >{{dashInstant.vanType}}</span></button>
+                    </td>
+                  </tr>
+
+
+                  <tr>
+
+                    <td>
+
+                      <button id="add-collection-address" data-toggle="modal" data-target="#form-bp1" type="button" class=" col-xs-12 btn btn-space btn-success btn-rounded pull-right"><i class="icon icon-left s7-map-marker "></i> Add Pickup <span ng-if="dashInstant.address.start_location.name && dashInstant.address.start_location.number" class="badge badge-primary" > {{dashInstant.address.start_location.name.formatted_address | limitTo: 7 }}...</span></button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+
+                      <button id="add-collection-address" data-toggle="modal" data-target="#form-bp4" type="button" class="col-xs-12 btn btn-space btn-success btn-rounded pull-right"><i class="icon icon-left s7-map-marker "></i> Add Dropoffs <span ng-if="dropOffLen > 0" class="badge badge-primary" >{{dropOffLen}} Dropoffs</span></button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <button id="choose-delivery-date"    data-toggle="modal" data-target="#form-bp99" type="button" class="col-xs-12 btn btn-space btn-success btn-rounded pull-right"><i class="icon icon-left s7-stopwatch"></i> Pickup Time + Date<span ng-if="jd" class="badge badge-primary" >{{jd}}</span></button></td>
+                    </tr>
+                    <!--
+                    <tr>
+                    <td>
+                    <button id="choose-pickup-slot" data-toggle="modal" data-target="#form-bp31" type="button" class=" col-xs-12 btn btn-space btn-success btn-rounded pull-right"><i class="icon icon-left s7-stopwatch"></i> Choose Pickup Slot <span ng-if="dashInstant.jobStartTimeHour && dashInstant.jobStartTimeMin" class="badge badge-primary" >{{dashInstant.jobStartTimeHour}}:{{dashInstant.jobStartTimeMin}}</span></button>
+
+                  </td>
+                </tr>
+              -->
+              <tr>
+                <td>
+                  <button id="add-inventory-button" ng-init="clickLoadBtn = false" ng-click="clickLoadBtn = true; loadBtnValid = true" data-toggle="modal" data-target="#inv-fullWidth2" type="button" ng-class="loadBtnToggle ? '' : 'disabled' " class=" col-xs-12 btn btn-space btn-success btn-rounded pull-right"><i class="icon icon-left s7-box2"></i> Loading/Waiting Time <span ng-if="clickLoadBtn == true" class="badge badge-primary" >{{dashInstant.loadTimeQty}} Mins</span></button>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="item"><strong>Do you want to add an extra <a href="javascript:;" data-html="true" data-toggle="popover" data-trigger="hover" data-content="
+                  If you click yes our driver will bring an extra worker to help with the lifting. This is useful if you are delivering heavy items. However there is an extra charge for this service.
+                  " data-placement="top">helper</a></strong>
+
+                  <div class=" mtnhy form-group">
+
+                    <div class="col-sm-5 xs-pt-5 pull-right">
+                      <div class="switch-button switch-button-success">
+                        <input ng-click="extraHelpClick()" type="checkbox" model="dashInstant.extraHelp" name="swt5" id="swt5"><span>
+                          <label for="swt5"></label></span>
+                        </div>
+                      </div>
+
+
+                    </div>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <button data-toggle="modal"  id="review-booking-button" ng-click="holdDriverDelay()" class="disabled btn btn-danger btn-space btn-hspace col-md-12 col-xs-12">Get Price</button>
+        <button id="cubic-click" data-toggle="modal" data-target="#cubic-limit" class="hide"></button>
+      </div>
+    </div>
+  </div>
+</aside>
+<div class="main-content hidden-xs">
+  <!--+general-chart("classes", "title", "height", "id", "counter value", "counter desc", tools enabled (use true or false))-->
+  <div class="col-md-12">
+    <div id="map-canvas" style="width:100%; height:590px;"></div>
+  </div>
+</div>
+</div>
+
+<!-- Get fixed quote Modal Ends Here-->
+
+<div dash-van-type></div>
+<div dash-route-plan></div>
+
+
+<div cubic-limit></div>
+<div review-booking></div>
+
+
+
+
+
+<div id="form-bp31" tabindex="-1" role="dialog" class="modal fade colored-header">
+  <div class="modal-dialog custom-width">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title text-center">{{dashInstant.jobDate}} | Choose Time Slot</h3>
+
+      </div>
+      <div class="modal-body form inv-no-border">
+        <div class="panel-body inv-no-border">
+          <div class="col-md-12">
+
+            <div class="btn-group btn-hspace">
+              <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle">Up to 30 minutes<span class="caret"></span></button>
+              <ul role="menu" class="dropdown-menu">
+                <li><a href="#">1 hr</a></li>
+                <li><a href="#">1hr 30 mins</a></li>
+                <li><a href="#">2 hrs</a></li>
+                <li><a href="#">2hr and 30 mins</a></li>
+                <li><a href="#">3 hrs</a></li>
+              </ul>
+            </div>
+
+            <button ng-change="changeData()" type="text" ng-model="dashInstant.jobStartTimeMin" class=" col-md-4 time-input-min btn btn-default dropdown-toggle" data-time-format="i"  >up to 30 minutes<span class="caret"></span></button>
+
+
+            <tr ng-if="nowTime > 18"><td>No more time slots available today please choose another date.</td></tr>
+            <tr ng-if="!dashInstant.jobDate"><td>Please choose a job starting date.</td></tr>
+
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn btn-default md-close">Cancel</button>
+        <button id="Time-slot-done" type="button" data-dismiss="modal" class="btn btn-primary md-close">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div id="form-bp99" tabindex="-1" role="dialog" class="modal fade colored-header">
+  <div class="modal-dialog custom-width">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title text-center">Choose Date</h3>
+      </div>
+      <div class="modal-body form">
+        <div class="panel-body">
+          <h2>Choose Date </h2>
+          <br>
+          <div class="input-group date datetimepicker col-md-12 col-xs-12">
+            <input placeholder="Delivery Date" id="job-date-picker" ng-change="changeData()" ng-model="dashInstant.jobDate" size="16" type="text" value="" class="form-control">
+            <span id="job-date-picker" class="input-group-addon btn btn-primary" ng-click="openCalendar()">
+
+              <i class="icon-th s7-date"></i>
+            </span>
+          </div>
+          <div class="clearfix"></div>
+          <h2>Choose Time </h2>
+          <br>
+          <div class="col-md-5 col-xs-5">
+            <input placeholder="Delivery Hour" ng-change="changeData()" type="text" ng-model="dashInstant.jobStartTimeHour" class="form-control time-input-hour" data-time-format="H" />
+          </div>
+
+          <div class="col-md-1 col-xs-1"><h3>:</h3></div>
+
+          <div class="col-md-5 col-xs-5">
+            <input placeholder="Delivery minute" ng-change="changeData()" type="text" ng-model="dashInstant.jobStartTimeMin" class="form-control time-input-min" data-time-format="i" />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn btn-default md-close">Cancel</button>
+        <button id="date-done" type="button" data-dismiss="modal" class="btn btn-primary md-close">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div id="form-bp4" tabindex="-1" role="dialog" class="modal fade colored-header">
+  <div class="modal-dialog custom-width">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title text-center">Add Collection Address</h3>
+      </div>
+      <div class="modal-body form">
+        <div class="panel-body">
+
+          <table class="table table-striped table-fw-widget">
+            <tbody ng-repeat="ext in dashInstant.extraDropArr">
+              <tr>
+                <td width="10%"><span class="badge badge-primary">Drop-off {{$index+1}}</span></td>
+                <td width="80%">
+                  <input id="delivery-postcode-input" class="form-control" force-selection="true" placeholder="Postcode" g-places-autocomplete options="autocompleteOptions" ng-model="dashInstant.extraDropObj[$index].postcode" ng-change="updateMaps(); changeData()" ng-model-options='{debounce: 100}' />
+                </td>
+                <td width="10%"><span style="cursor:pointer;" ng-click="deleteDropRow($index)" ng-if="$index > 0" class="badge badge-primary">X</span></td>
+              </tr>
+              <tr>
+                <td width="10%"></td>
+                <td width="80%">
+                  <input id="delivery-postcode-input" class="form-control" placeholder="Door Number"  ng-model="dashInstant.extraDropObj[$index].doorNumber" ng-change="changeData()" ng-model-options='{debounce: 100}' />
+                </td>
+                <td width="10%"><span class="badge badge-primary"></span></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <button type="button" ng-click="addDrop()" class="btn btn-primary pull-right col-md-4 btn-space">Add Drop Off</button>
+
+          <button type="button" ng-class="optimize ? '' : 'disabled' " ng-click="optRouteFunc()" class="btn btn-primary pull-right col-md-4 btn-space">Optimise Route <img id="optSpin" class="hide" style="width: 16px;" src="/assets/img/35.gif"></button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button"  data-dismiss="modal" class="btn btn-default md-close">Cancel</button>
+        <button id="collection-address-done" type="button" data-dismiss="modal" class="btn btn-primary md-close">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="inv-fullWidth2" ng-if="loadBtnToggle == true" tabindex="-1" role="dialog" class="modal fade colored-header">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <h3 class="modal-title text-center">Choose Loading Times</h3>
+        <!--cancel button ends here-->
+      </div>
+      <div class="modal-body inv-no-border">
+        <div class="panel-body inv-no-border">
+
+          <br>
+          <form action="#" style="border-radius: 0px;" class="form-horizontal group-border-dashed">
+
+            <table class="table table-striped table-fw-widget">
+              <tbody>
+
+                <tr>
+                  <td width="50%">
+                    <strong>Pickup Address: </strong>{{dashInstant.address.start_location.name.formatted_address}}
+                  </td>
+                  <td width="50%">
+                    <div class=" col-xs-12 col-sm-12 input-group auto-marg">
+                      <div class=" text-center col-xs-12 col-sm-12 input-group">
+                        <div class="btn-group btn-hspace">
+                          <select ng-change="changeData()" ng-options="option.name for option in loadOptions track by option.qty" name="singleSelect" id="singleSelect" ng-model="dashInstant.loadTimeObj[0]">
+                          </select>
+                        </div>
+                      </div>
+                    </div></td>
+                  </tr>
+                  <tr ng-repeat="drop in dashInstant.extraDropObj">
+                    <td width="50%"><strong>Drop Off: </strong>{{drop.postcode.formatted_address}}
+                    </td>
+                    <td width="50%">
+                      <div class=" col-xs-12 col-sm-12 input-group auto-marg">
+                        <div class=" text-center col-xs-12 col-sm-12 input-group">
+                          <div class="btn-group btn-hspace">
+                            <select ng-change="changeData()" ng-options="option.name for option in loadOptions track by option.qty" name="singleSelect" id="singleSelect" ng-model="dashInstant.loadTimeObj[$index+1]">
+                            </select>
+                          </div>
+                        </div>
+                      </div></td>
+                    </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+                <button id="inventory-done" type="button" data-dismiss="modal" class="btn btn-primary">Done</button>
+              </div>
+            </div>
+          </div>
+        </div>

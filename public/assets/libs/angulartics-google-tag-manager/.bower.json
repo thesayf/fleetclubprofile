@@ -1,0 +1,31 @@
+{
+  "name": "angulartics-google-tag-manager",
+  "homepage": "https://github.com/angulartics/angulartics-google-tag-manager",
+  "contributors": [
+    "Jared Dickson <code@jareddickson.con>"
+  ],
+  "description": "Google Tag Manager plugin for Angulartics",
+  "main": "lib/angulartics-google-tag-manager.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "package.json",
+    "lib/index.js"
+  ],
+  "dependencies": {
+    "angulartics": "^1.0.0"
+  },
+  "version": "0.0.1",
+  "_release": "0.0.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.0.1",
+    "commit": "9e5902c866f50084b46f245f8e6b00e7731ba128"
+  },
+  "_source": "https://github.com/angulartics/angulartics-google-tag-manager.git",
+  "_target": "^0.0.1",
+  "_originalSource": "angulartics-google-tag-manager",
+  "_direct": true
+}

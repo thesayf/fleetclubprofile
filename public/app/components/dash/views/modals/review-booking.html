@@ -1,0 +1,170 @@
+
+<div id="md-review" tabindex="-1" role="dialog" class="modal fade colored-header">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="text-center">Review Your Booking</h3>
+            </div>
+
+            <div class="modal-body testy rev-border">
+                <div class="panel-body text-center modal-price-table2">
+                <div id="modal-cont" class="row">
+                    <div ng-if="totalCuft < 600" id="review-body" class="row pricing-tables review-body">
+                        <div class="col-md-12">
+                              <div id class="pricing-table-title text-center">Your Quote</div>
+                              <div class="panel-divider panel-divider-xl"></div>
+                              <div class="col-md-12">
+                                  <div class="pricing-table-price"><span class="currency">£</span><span class="value">{{dashInstant.estiCalc}}</span><span class="frecuency">/Total</span></div>
+                                  <div class="pricing-table-description">There are <strong><u>{{dashInstant.driverCount}}</u></strong> Drivers available for this delivery</div>
+                              </div>
+                      </div>
+                    </div>
+
+                    <div ng-if="totalCuft >= 600" id="review-body" class="row pricing-tables ">
+                        <div class="col-md-12">
+                            <div class="pricing-table pricing-table-primary">
+                              <div class="pricing-table-title text-center">Ooops!</div>
+                              <div class="panel-divider panel-divider-xl"></div>
+                              <div class="col-md-12">
+                                  <p>You have exceeded the load limit allowed here. Please give us a call for larger jobs.</p>
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+<!--
+                  <div id="review-body" class="text-center review-body">
+                            <div class="i-circle text-success"><i class="icon s7-check"></i></div>
+                            <h4>Your Price £{{dashInstant.estiCalc}}</h4>
+                            <h4>Congratulations there are {{dashInstant.driverCount}} drivers for your booking on the {{dashInstant.jobDate}}</h4>
+                            <p>To complete this booking please to proceed to checkout</p>
+                        </div>
+-->
+                    </div>
+
+                  </div>
+              <div class="panel-body modal-price-table review-body">
+                 <table class="table table-striped table-fw-widget">
+                <tbody>
+
+                  <tr>
+                          <td>We will send a <a id="popimage" href="javascript:;" data-toggle="popover" data-trigger="hover" title="Van Details" data-content="{{dashInstant.vanDeets}}" data-img="/assets/img/luton.png" data-placement="right"><u>{{dashInstant.van}}</u></a></td>
+                      <td class="">
+                        <span class="pull-left">
+                        <img ng-if="dashInstant.van == 'SWB Van' " src="assets/img/short-wheel-base-swb.png">
+                        <img ng-if="dashInstant.van == 'LWB Van' " src="assets/img/long-wheel-base-lwb.png">
+                        <img ng-if="dashInstant.van == 'Luton Van' " src="assets/img/luton-van-jumbo.png">
+                      </span></td>
+                    </tr>
+                      <tr>
+                          <td>Workers</td>
+                      <td class="number"><span ng-if="dashInstant.extraHelp == false">1</span><span ng-if="dashInstant.extraHelp == true">2</span> Man</td>
+                    </tr>
+
+                  </tbody>
+                </table>
+                      <a class="pull-right" id="popimage" href="javascript:;" data-toggle="popover" data-trigger="hover" title="Van Details" data-content="To place a booking you paythe total cost of the delivery. You may pay this by debit/credit card. We accept all major cards. If for any reason you wish to cancel a your delivery this will be refunded to you as long as it is cancelled before the driver has been dispatched" data-img="/assets/img/luton.png" data-placement="top">Payment Breakdown</a>
+
+</div>
+
+            </div>
+                <div class="clearfix"></div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+
+                <a ng-if="totalCuft < 600" ng-click="goToCheck()">
+                    <button id="checkout-button" data-dismiss="modal" class="btn btn-danger btn-space btn-hspace">Check Out</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+     <!--
+            <div class="row">
+                        <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-6">
+                            <div class="widget widget-tile">
+                              <div class="data-info">
+                                <div  data-toggle="counter" data-end="18.6" data-decimals="1" data-suffix="%" class="value">{{dashInstant.vanName}}</div>
+                                <div class="desc">Van Type</div>
+                              </div>
+                              <div class="icon"><span class="s7-car"></span></div>
+                            </div>
+                </div>
+                <div class="col-md-6">
+                            <div class="widget widget-tile">
+                              <div class="data-info">
+                                <div class="value">4</div>
+                                <div class="desc">Hours</div>
+                              </div>
+                              <div class="icon"><span class="s7-timer"></span></div>
+                            </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                            <div class="widget widget-tile">
+                              <div class="data-info">
+                                <div class="value">{{dashInstant.jobDate}}</div>
+                                <div class="desc">Date</div>
+                              </div>
+                              <div class="icon"><span class="s7-date"></span></div>
+                            </div>
+                </div>
+                <div class="col-md-6">
+                            <div class="widget widget-tile">
+                              <div class="data-info">
+                                <div class="value">SW19 3TZ</div>
+                                <div class="desc">Route</div>
+                              </div>
+                              <div class="icon"><span class="s7-map-marker"></span></div>
+                            </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="widget widget-tile widget-tile-wide">
+                    <div class="tile-info">
+                      <div class="icon"><span class="s7-credit"></span></div>
+                      <div class="data-info">
+                        <div class="title">Total Pice</div>
+                          <div class="desc">Estimated Cost</div>
+                      </div>
+                    </div>
+                    <div class="tile-value"><span>£140</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+                </div>
+                -->
+
+
+
+
+
+
+
+
+
+        <!--
+
+						<form class="form-horizontal">
+													<div class="form-group">
+														<label class="col-lg-2 control-label" for="inputName">Name</label>
+														<div class="col-lg-10">
+															<input class="form-control" id="inputName" placeholder="Name" type="text">
+														</div>
+													</div>
+
+													<div class="form-group">
+														<label class="col-lg-2 control-label" for="inputMessage">Message</label>
+														<div class="col-lg-10">
+															<textarea class="form-control" id="inputMessage" placeholder="Message" rows="3"></textarea>
+														</div>
+													</div>
+												</form>
+											</div><!-- end modal-body -->

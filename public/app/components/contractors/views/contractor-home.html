@@ -1,0 +1,294 @@
+        <div class="main-content col-md-8 col-md-offset-2">
+          <div class="row">
+            <div class="col-md-12">
+             <div class="row">
+                 
+        <div class="user-profile col-md-12 col-sm-12 margintop">
+                <div class="info-block panel panel-primary">
+                  <div class="panel-heading">
+                    <h4>Signing Up With Movers Pro</h4>
+                  </div>
+                  <div class="panel-body">
+                      
+                      <span class="description">Hi and welcome to our app. pleas upload your documents to our system and we will get you on the road</span>
+                      <div>
+                        <p>
+                        <ol>
+                            <li>Yo want to see how ths looks fot the stuff</li> 
+                            <li>I wonder how this looks</li>  
+                        </ol>  
+                          
+                        </p>
+                      </div>
+                  </div>
+                </div>
+              </div>
+                 
+        <div class="col-sm-12">
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                  <h1>(Step 1) Add Your Driver Information</h1>
+                  <button ng-if="firstedit == false" class="text-center pull-right" ng-click="editProfile()">Edit</button>
+                </div>
+                <div class="panel-body" >
+                  <form name="form" novalidate="novalidate">
+                    <div class="form-group col-md-6">
+                      <label><strong>Driver Name</strong></label>
+                      <p ng-if="profile == 'start'">{{firstname}}</p>
+                      <p ng-if="profile == 'updated'">{{firstname}}<br>{{lastname}}</p>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label><strong>User Name</strong></label>
+                      <p ng-if="profile == 'start'">{{username}}</p>
+                      <p ng-if="profile == 'updated'">{{username}}</p>
+                    </div>
+                    <div class="form-group">
+                      <label>Vehicle Type:</label>
+                            <select ng-if="firstedit !== false" ng-model="driver.vehicle" class="form-control" placeholder="Van Type Name" required>
+                                  <option>Type of Vehicle</option>
+                                  <option>car derived van</option>
+                                  <option>swb transit</option>
+                                  <option>mwb transit</option>
+                                  <option>lwb tranist </option>
+                                  <option>swb Luton</option>
+                                  <option>mwb Luton</option>
+                                  <option>lwb Luton</option>
+                                </select>
+                      <div ng-if="firstedit == false">{{vehicle}}</div>
+                    </div>
+                    <div class="form-group">
+                      <label>Vehicle reg</label>
+                      <input ng-if="firstedit !== false" placeholder="Please Add Your Reg Here" class="form-control" ng-model="driver.reg" type="text"
+required>
+                      <div ng-if="firstedit == false">{{reg}}</div>
+                    </div>
+                    <div class="form-group">
+                      <label>Vehicle Make</label>
+                      <input ng-if="firstedit !== false" placeholder="Please Add Your Make Here" class="form-control" ng-model="driver.make" type="text"
+required>
+                      <div ng-if="firstedit == false">{{make}}</div>
+                    </div>
+                    <div class="form-group">
+                      <label>Vehicle Model</label>
+                      <input placeholder="Please Add Your Model Here" class="form-control" ng-if="firstedit !== false" ng-model="driver.model" type="text" required>
+                      <div ng-if="firstedit == false">{{model}}</div>
+                    </div>
+                    <div class="form-group">
+                      <label>Fuel Type</label>
+                            <select ng-if="firstedit !== false" ng-model="driver.fuel" class="form-control" placeholder="Van Type Name" required>
+                                  <option>Diesel</option>
+                                  <option>Petrol</option>
+                                </select>
+                      <div ng-if="firstedit == false">{{fuel}} {{firstedit}}</div>
+                    </div>
+                    <div class="form-group">
+                      <label>Year</label>
+                      <input  placeholder=" e.g 2004" class="form-control" ng-if="firstedit !== false" ng-model="driver.year" type="text" required>
+                      <div ng-if="firstedit == false">{{year}}</div>
+                    </div>
+                    <div class="form-group">
+                      <label>License Number</label>
+                      <input  placeholder="745698" class="form-control" ng-if="firstedit !== false" ng-model="driver.number" type="text" required>
+                      <div ng-if="firstedit == false">{{number}}</div>
+                    </div>
+                    <div class="form-group">
+                      <label>License expiry</label>
+                      <input placeholder="745698" class="form-control" ng-if="firstedit !== false" ng-model="driver.expiry" type="text" required>
+                      <div ng-if="firstedit == false">{{expiry}}</div>
+                    </div>
+                    <div class="form-group">
+                      <label>Mobile</label>
+                      <input type="name" placeholder="745698" class="form-control"  ng-if="firstedit !== false" ng-model="driver.mobile" type="text" required>
+                      <div ng-if="firstedit == false">{{mobile}}</div>
+                    </div>
+                    <div class="form-group">
+                      <label>Bank Account</label>
+                       <button ng-if="firstedit !== false"  data-toggle="modal" data-target="#md-default3">Add</button>
+                      <div ng-if="firstedit == false">{{bank}}</div>
+                    </div>
+                    <div class="spacer text-right">
+                      <button ng-disabled="form.$invalid" class="btn btn-space btn-primary" ng-if="firstedit !== false" ng-click="submitAccountInfo()">Submit</button>
+                    </div>
+                  </form>
+                </div>
+                  
+              </div>
+            </div>
+                 
+                 <div class="user-profile col-md-12 col-sm-12">
+                <div class="info-block panel panel-primary">
+                  <div class="panel-heading">
+                    <h4>(Step 2) Upload Your Documentation</h4>
+                  </div>
+                  <div class="panel-body"><span class="description">Hi and welcome to our app. pleas upload your documents to our system and we will get you on the road</span>
+                    <table class="no-border no-strip skills">
+                      <tbody class="no-border-x no-border-y">
+                        <tr>
+                          <td class="item">Insurance document:<span class="icon s7-umbrella"></span></td>
+                          <td>
+                              <image ng-src="{{driverDocs.savePath + driverDocs.insurance.image}}" class="img-fit">
+                          </td>
+                             <td><button ng-if="file == 'noFile'" class="button" ngf-select="upload($file)">Upload on file select</button></td>
+                            <td><button ng-click="deleteFile()" ng-if="file == 'uploaded'" class="pull-right">Delete</button></td>
+                            <td><button ng-if="file == 'file'" class="pull-right" ng-click="submitFileInfo('insurance')">Submit</button></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+                
+                 <!--
+                 <div class="user-profile col-md-12 col-sm-12">
+                <div class="info-block panel panel-primary">
+                  <div class="panel-heading">
+                    <h4>(Step 3) Add Your Card</h4>
+                  </div>
+                  <div class="panel-body"><span class="description">Hi and welcome to our app. pleas upload your documents to our system and we will get you on the road</span>
+                    <table class="no-border no-strip skills">
+                      <tbody class="no-border-x no-border-y">
+                        <tr>
+                          <td class="item">Add Card<span class="icon s7-credit"></span></td>
+                          <td><button data-toggle="modal" data-target="#stripe-addcard" class="pull-right">Add</button></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+                
+                -->
+                 
+            </div>
+          </div>    
+        </div>
+      </div>
+
+<!-- ADDRESS MODAL ------------------------------------------------------------------------------------------------------------------>
+
+<div id="md-default" tabindex="-1" role="dialog" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button " data-dismiss="modal" aria-hidden="true" class="close"><i class="icon s7-close"></i></button>
+                    <h3>My Address</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <input class="form-control" placeholder="house no."/>
+                        </div>
+                        <div class="col-sm-10 col-md-9">
+                            <div class="input-group xs-mb-15 col-md-12">
+                                    <input class="form-control" placeholder="Start Address" g-places-autocomplete options="autocompleteOptions" ng-model="address.start_location.name" ng-change="updateMaps()" ng-model-options='{debounce: 1000}' />
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-primary">Proceed</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- CARD DETAILS ------------------------------------------------------------------------------------------------------------------>
+
+<div id="stripe-addcard" tabindex="-1" role="dialog" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close"><i class="icon s7-close"></i></button>
+                </div>
+                <div class="modal-body">
+
+                    <h3 class="modal-title">Manage cards</h3>
+                    <br>
+                    
+<!--
+                    <div>
+                        <h4>xxxx-xxxx-xxxx-{{cardDetails.last4}} <button ng-click="removeCard()" class="btn btn-primary">Remove Card</button></h4>
+
+                    </div>
+-->
+
+                    <div>
+
+                        <form action="" method="POST" id="payment-form">
+                            <span class="payment-errors"></span>
+
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Card Number</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" data-stripe="number">
+                                </div>
+                            </div>
+                            <div style="clear:both;"><br></div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">CVC</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" data-stripe="cvc">
+                                </div>
+                            </div>
+                            <div style="clear:both;"><br></div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Expiration (MM/YYYY)</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" data-stripe="exp-month">
+                                </div>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" data-stripe="exp-year">
+                                </div>
+                            </div>
+                            <div style="clear:both;"><br></div>
+
+
+
+                            <button ng-click="getCardForm()" class="btn btn-primary">Add Card</button>
+                        </form>
+
+
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+<!-- BANK DETAILS ------------------------------------------------------------------------------------------------------------------>
+
+<div id="md-default3" tabindex="-1" role="dialog" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button " data-dismiss="modal" aria-hidden="true" class="close"><i class="icon s7-close"></i></button>
+                    <h3>Bank Details</h3>
+                </div>
+                <div class="modal-body form">
+                        <div class="form-group">
+                          <label>Name On Account</label>
+                          <input type="name" placeholder="John Doe" class="form-control" ng-model="driver.bank"> 
+                        </div>
+                        <div class="form-group">
+                          <label>Acc Number</label>
+                          <input type="name" placeholder="745698" class="form-control" ng-model="driver.acc">
+                        </div>
+                        <div class="form-group">
+                          <label>Acc Number</label>
+                          <input type="name" placeholder="745698" class="form-control" ng-model="driver.sc">
+                        </div>
+                        
+                      </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-primary">Proceed</button>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,122 @@
+
+<div id="form-bp1" tabindex="-1" role="dialog" class="modal fade colored-header">
+    <div class="modal-dialog custom-width">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title text-center">Add Collection Address</h3>
+            </div>
+            <div class="modal-body form">
+                <div class="panel-body">
+
+                <table class="table table-striped table-fw-widget">
+                <tbody>
+
+                    <tr>
+                        <td width="100%"><input id="delivery-postcode-input" class="form-control" force-selection="true" placeholder="Postcode" g-places-autocomplete options="autocompleteOptions" ng-model="dashInstant.address.start_location.name" ng-change="updateMaps(); changeData()" ng-model-options='{debounce: 100}' /></td>
+                    </tr>
+                    <tr>
+                        <td width="100%"><input id="delivery-postcode-input" class="form-control"  placeholder="House Number"  ng-model="dashInstant.address.start_location.number" ng-change="changeData()" ng-model-options='{debounce: 100}' /></td>
+                    </tr>
+
+                  </tbody>
+                </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button"  data-dismiss="modal" class="btn btn-default md-close">Cancel</button>
+                <button id="collection-address-done" type="button" data-dismiss="modal" class="btn btn-primary md-close">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="form-bp2" tabindex="-1" role="dialog" class="modal fade colored-header">
+    <div class="modal-dialog custom-width">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title text-center">Add Collection Address</h3>
+            </div>
+            <div class="modal-body form">
+                <div class="panel-body">
+                  <form role="form">
+                       <div class="form-group">
+                        <label>Collection Postcode</label>
+                        <input id="delivery-postcode-input" class="form-control" force-selection="true" placeholder="Postcode" g-places-autocomplete options="autocompleteOptions" ng-model="dashInstant.address.end_location.name" ng-change="updateMaps(); changeData()" ng-model-options='{debounce: 100}' />
+                      </div>
+                      <div class="form-group">
+                        <label>Building/Door Number</label>
+                        <input id="delivery-doornumber-input" class="form-control" ng-change="changeData()" ng-model="dashInstant.address.start_location.number" placeholder="Door Number" />
+                      </div>
+                      <div class="form-group">
+                    <label>Collection Contact Name</label>
+                      <input id="collection-doornumber-input" class="form-control" ng-model="dashInstant.pickName" ng-change="changeData()" placeholder="Contact Name" />
+                    </div>
+                    <div class="form-group">
+                    <label>Collection Contact Number</label>
+                      <input id="collection-doornumber-input" class="form-control" ng-model="dashInstant.pickNumber" ng-change="changeData()" placeholder="Contact Number" />
+                    </div>
+                    <div class="form-group">
+                    <label>Collection Contact Email</label>
+                      <input id="collection-doornumber-input" class="form-control" ng-model="dashInstant.pickEmail" ng-change="changeData()" placeholder="Contact Email" />
+                    </div>
+                    <div class="form-group">
+                    <label>Collection Instructions Instructions</label>
+                      <textarea id="notesinput" required=""  ng-model="jobDeets.pickInstructions" class="form-control"></textarea>
+                    </div>
+                    </form>
+              </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-default md-close">Cancel</button>
+                <button id="delivery-address-done" type="button" data-dismiss="modal" class="btn btn-primary md-close">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="form-bp3" tabindex="-1" role="dialog" class="modal fade colored-header">
+    <div class="modal-dialog custom-width">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title text-center">Add Delivery Address</h3>
+            </div>
+            <div class="modal-body form">
+                <div class="panel-body">
+                  <form role="form">
+                       <div class="form-group">
+                         <label>Delivery Postcode</label>
+                        <input id="delivery-postcode-input" class="form-control" force-selection="true" placeholder="Postcode" g-places-autocomplete options="autocompleteOptions" ng-model="dashInstant.extraDropObj[dashInstant.delChange].postcode" ng-change="updateMaps(); changeData()" ng-model-options='{debounce: 100}' />
+                      </div>
+                      <div class="form-group">
+                        <label>Building/Door Number</label>
+                        <input id="delivery-doornumber-input" class="form-control" ng-change="changeData()" ng-model="dashInstant.extraDropObj[dashInstant.delChange].doorNumber" placeholder="Door Number" />
+                      </div>
+                      <div class="form-group">
+                    <label>Delivery Contact Name</label>
+                      <input id="collection-doornumber-input" class="form-control" ng-model="dashInstant.extraDropObj[dashInstant.delChange].dashInstant.extraDropObj[dashInstant.delChange].name" ng-change="changeData()" placeholder="Contact Name" />
+                    </div>
+                    <div class="form-group">
+                    <label>Delivery Contact Number</label>
+                      <input id="collection-doornumber-input" class="form-control" ng-model="dashInstant.extraDropObj[dashInstant.delChange].number" ng-change="changeData()" placeholder="Contact Number" />
+                    </div>
+                    <div class="form-group">
+                    <label>Delivery Contact Email</label>
+                      <input id="collection-doornumber-input" class="form-control" ng-model="dashInstant.extraDropObj[dashInstant.delChange].email" ng-change="changeData()" placeholder="Contact Email" />
+                    </div>
+                    <div class="form-group">
+                    <label>Delivery Instructions Instructions</label>
+                      <textarea id="notesinput" required=""  ng-model="dashInstant.extraDropObj[dashInstant.delChange].instructions" class="form-control"></textarea>
+                    </div>
+                    </form>
+              </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-default md-close">Cancel</button>
+                <button id="delivery-address-done" type="button" data-dismiss="modal" class="btn btn-primary md-close">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>

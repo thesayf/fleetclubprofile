@@ -1,0 +1,62 @@
+
+<div navi></div>
+
+<div class="row wizard-row">
+            <div class="col-md-12 fuelux">
+              <div class="block-wizard panel panel-default">
+                <div id="wizard1" class="wizard wizard-ux">
+                  <div class="step-content">
+                    <div  data-step="1" class="step-pane active">
+                      <section class="mainContent clearfix setp5">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="thanksContent">
+                <h2>Thank You For Your Order <small>You will receive an email of your order details</small></h2>
+                <h3 ng-click="test()">Booking Details</h3>
+                <div class="thanksInner">
+                  <div class="row">
+                    <div class="col-sm-6 col-xs-12 tableBlcok">
+                      <address>
+                        <span>Pick Up Address:</span> {{jobDeets.address.start_location.number}} {{jobDeets.address.start_location.name.formatted_address}} <br>
+                        <span>Delivery Address:</span> <p ng-repeat="ext in jobDeets.extraDropObj">{{ext.doorNumber}}, {{ext.postcode.formatted_address}}</p> <br>
+                         <span>Date and Time:</span> {{jobDeets.jobDate}}, {{jobDeets.jobStartTime}}<br>
+                        <span>Phone:</span> {{jobDeets.number}}<br>
+                        <span>Email:</span> {{jobDeets.email}}<br>
+                          <span>Van Type:</span> {{jobDeets.vanType}} <br>
+                          <span>Price:</span> £{{jobDeets.estiCalc}}.00 <br>
+                          <span>Deposit paid:</span> £{{jobDeets.deposit}}.00 <br>
+                          <span>To Be Paid:</span> £{{jobDeets.toPay}}.00 <br>
+                          <span>What happens next? - Important notes please read</span><br>
+                          <div class="col-sm-12 col-xs-12 tableBlcok">
+                          <ul>
+                            <li>We have sent a receipt to your email which you will receive shortly. You will receive contact details the driver once he has been dispatched on the day prior to the delivery start time.</li>
+                              <li>You will need to pay the remaining balance to the driver by cash at the end of the delivery. Please have this ready by the end of the job.</li>
+                          <li> If you need to move any other items, unfortunately this cannot be included in this order and you will need to place another order using the booking form again. Don’t worry about a bag or two if you forgot, but if it is anything more than that then do place a separate order as it is at the driver’s discretion whether he takes them.</li>
+                              <li> If you need to change the date of the delivery please send an email to us stating the new date: hello@thevanclub.io.</li>
+                              <li> If you need to change the time you may contact the driver directly to do this once you receive his telephone number. </li>
+                          </ul>
+                          </div>
+
+
+                      </address>
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                      <div id="orderIdBox" class="well">
+                        <h2><small>Order ID</small>{{jobDeets.paymentID}}</h2>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>

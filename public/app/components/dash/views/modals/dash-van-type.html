@@ -1,0 +1,238 @@
+<!-- Get fixed quote Modal Ends Here-->
+
+<div id="inv-fullWidth" tabindex="-1" role="dialog" class="modal fade colored-header">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h3 class="modal-title text-center">Choose Van For Delivery</h3>
+                <!--cancel button ends here-->
+            </div>
+            <div class="modal-body inv-no-border">
+            <div class="panel-body inv-no-border">
+
+                <br>
+                        <form action="#" style="border-radius: 0px;" class="form-horizontal group-border-dashed">
+
+                    <table class="table table-striped table-fw-widget">
+                <tbody>
+
+                  <tr>
+                          <td width="50%"><strong>SWB Van </strong>
+                                        <br>
+
+                             <div class="col-md-12"><img src="assets/img/short-wheel-base-swb.png"></div>
+                              
+                        <a href="javascript:;" data-html="true" data-toggle="popover" data-trigger="hover" data-content="
+                                    short wheel base - 200 ft3
+                                       <br>                               
+                                    Length: 2.4m
+                                         <br>                  
+                                    Width: 1.7m
+                                        <br>
+                                    Height: 1.4m or 1.65m with medium roof
+                                        <br>
+                                    Payload - 900-1200kg                                                                              " data-placement="right">See description</a>
+                          </td>
+                      <td width="50%">
+                        <div class=" text-center col-xs-12 col-sm-12 input-group">
+                        <input id="time-slot-1500-1700" ng-model="dashInstant.vanType" type="radio" checked="" ng-change="changeData()" value="SWB Van" name="rad1" id="rad1">
+                      </div></td>
+                    </tr>
+                      <tr>
+                          <td width="10%"><strong>LWB Van </strong>
+                                        <br>
+
+                              <div class="col-md-12"><img src="assets/img/long-wheel-base-lwb.png"></div>
+                                        <br><a href="javascript:;" data-html="true" data-toggle="popover" data-trigger="hover" data-content="
+                                           Long wheel base- 350 ft3
+                                            <br>
+                                        Length: 3.4m
+                                            <br>
+                                        Width: 1.7m
+                                            <br>
+                                        Height: 1.7m
+                                            <br>
+                                        Payload - 1200-1500kg
+" data-placement="right ">See description</a>
+                          </td>
+                      <td width="90%"><div class="col-xs-12 col-sm-12 input-group auto-marg">
+                        <div class=" text-center col-xs-12 col-sm-12 input-group">
+                        <input  id="time-slot-1500-1700" ng-model="dashInstant.vanType" type="radio" checked="" ng-change="changeData()" value="LWB Van" name="rad1" id="rad1">
+                      </div>
+                      </div></td>
+                    </tr>
+                      <tr>
+                          <td width="10%"><strong>Luton Van</strong><br>
+                              <div class="col-md-12">    <img src="assets/img/luton-van-jumbo.png"></div>
+                              <a href="javascript:;" data-html="true" data-toggle="popover" data-trigger="hover" data-content="
+                                        Luton van- 600 ft3
+                                          <br>                                        
+                                        Length: 4m
+                                             <br>                                             
+                                        Width: 2m
+                                             <br>            
+                                        Height: 2.2m
+                                              <br>                                             
+                                        Payload -1000-1200kg
+                              " data-placement="right">See description</a>
+                          </td>
+                      <td width="90%"><div class=" col-xs-12 col-sm-12 input-group auto-marg">
+                        <div class=" text-center col-xs-12 col-sm-12 input-group">
+                        <input  id="time-slot-1500-1700" ng-model="dashInstant.vanType" type="radio" checked="" ng-change="changeData()" value="Luton Van" name="rad1" id="rad1">
+                      </div>
+                      </div></td>
+                    </tr>
+
+                  </tbody>
+                </table>
+
+
+
+                           <div style="width: 100%; margin:10px 0 0 0;" class="growl growl-error growl-medium cubic-error hide">
+                      <div class="growl-title">Cubic Volume Limit Has Been Reached!</div>
+                      <div class="growl-message">Please call us to arrange a special move 07852806618</div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+                    <div class="form-group text-center">
+                      <label class="col-sm-12">Small Item | <a href="javascript:;" data-toggle="popover" data-trigger="hover" data-content="like an average packing box or a black bag (40cm x 40cm x 35cm)" data-placement="top">example</a> </label>
+                      <div class="col-xs-6 col-sm-6 input-group auto-marg">
+-->
+                        <!-- <input type="number" ng-change="changeData()" class="form-control" ng-model="dashInstant.itemBoxes[0].qty"> -->
+<!--
+                        <span ng-click="changeInventory('minus', 0)" class="input-group-addon plus-minus">-</span><input class="form-control" type="text" ng-model="dashInstant.itemBoxes[0].qty" ng-change="changeData()"><span ng-click="changeInventory('plus', 0)" class="input-group-addon plus-minus">+</span>
+                      </div>
+                    </div>
+                    <div class="form-group text-center">
+                      <label class="col-sm-12 text-center">Medium Item | <a href="javascript:;" data-toggle="popover" data-trigger="hover" data-content="like a chest of drawers or a dining table (105cm x 105cm x 50cm)" data-placement="top">example</a> </label>
+                      <div class="col-xs-6 col-sm-6 input-group auto-marg">
+-->
+                        <!-- <input type="number" ng-change="changeData()" class="form-control" ng-model="dashInstant.itemBoxes[1].qty"> -->
+<!--
+                        <span ng-click="changeInventory('minus', 1)" class="input-group-addon plus-minus">-</span><input class="form-control" type="text" ng-model="dashInstant.itemBoxes[1].qty" ng-change="changeData()"><span ng-click="changeInventory('plus', 1)" class="input-group-addon plus-minus">+</span>
+                      </div>
+                    </div>
+                    <div class="form-group text-center">
+                     <label class="col-sm-12">Large Item | <a href="javascript:;" data-toggle="popover" data-trigger="hover" data-content="like a fridge freezer or a double bed (200cm x 140cm x  50cm)" data-placement="top">example</a> </label>
+                      <div class=" col-xs-6 col-sm-6 input-group auto-marg">
+-->
+                        <!-- <input type="number" ng-change="changeData()" class="form-control" ng-model="dashInstant.itemBoxes[2].qty"> -->
+<!--
+                        <span ng-click="changeInventory('minus', 2)" class="input-group-addon plus-minus">-</span><input class="form-control" type="text" ng-model="dashInstant.itemBoxes[2].qty" ng-change="changeData()"><span ng-click="changeInventory('plus', 2)" class="input-group-addon plus-minus">+</span>
+                      </div>
+                    </div>
+                  </form>
+
+                    <div style="width: 100%; margin:10px 0 0 0;" class="growl growl-error growl-medium cubic-error hide">
+                      <div class="growl-title">Error!</div>
+                      <div class="growl-message">Please call us for moves with 600 cubic feet or over!</div>
+                    </div>
+-->
+
+
+<!--
+
+-->
+
+
+
+
+
+<!--
+                <div class="row">
+                    <div class="panel-heading">
+                  <h3><strong>Name the items you are moving</strong></h3>
+                </div>
+                    <form action="#" style="border-radius: 0px;" class="form-horizontal group-border-dashed">
+                    <div class="form-group">
+                      <label class="col-sm-5 control-label">Give us a brief list of the names of the items you are moving </label>
+                      <div class="col-sm-7">
+                        <textarea required=""  ng-model="jobDeets.instructions" class="form-control"></textarea>
+                      </div>
+                    </div>
+                  </form>
+
+                </div>
+-->
+
+
+            </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+                <button id="inventory-done" type="button" data-dismiss="modal" class="btn btn-primary">Done</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--
+<div id="inv-fullWidth" tabindex="-1" role="dialog" class="modal fade colored-header">
+    <div class="modal-dialog full-width">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button id="item-modal-close" type="button" data-dismiss="modal" aria-hidden="true" class="close"><i class="icon s7-close"></i></button>
+                <h3 class="modal-title">Choose your van</h3>
+            </div>
+            <div class="modal-body">
+            <div class="panel-body">
+                <div class="row">
+                    <form action="#" style="border-radius: 0px;" class="form-horizontal group-border-dashed">
+                    <div class="form-group">
+                      <label class="col-sm-5 control-label">Small Item (anything up to a box) </label>
+                      <div class="col-sm-2">
+                        <input type="number" ng-change="changeData()" class="form-control" ng-model="dashInstant.itemBoxes[0].qty">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-5 control-label">Medium Item (anything up to a chest of draws) </label>
+                      <div class="col-sm-2">
+                        <input type="number" ng-change="changeData()" class="form-control" ng-model="dashInstant.itemBoxes[1].qty">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-5 control-label">Large Item (anything up to a chest of king size bed) </label>
+                      <div class="col-sm-2">
+                        <input type="number" ng-change="changeData()" class="form-control" ng-model="dashInstant.itemBoxes[2].qty">
+                      </div>
+                    </div>
+                    <div id="limit-note" role="alert" class="alert alert-danger alert-icon alert-icon-color alert-dismissible">
+                    <div class="icon"><span class="s7-close-circle"></span></div>
+                    <div class="message">
+                        <h3>Cubic Volume Limit Has Been Reached!</h3>
+                        <p>Please call us to arrange a special move 07852806618</p>
+                    </div>
+                  </div>
+                  </form>
+
+                </div>
+            </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+                <button type="button" data-dismiss="modal" class="btn btn-primary">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
+-->

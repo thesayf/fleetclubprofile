@@ -1,0 +1,177 @@
+<div navi></div>
+
+<div class="row wizard-row">
+            <div class="col-md-6 col-md-offset-3 fuelux">
+              <div class="block-wizard panel panel-default">
+                <div id="wizard1" class="wizard wizard-ux">
+                  <ul class="steps">
+                    <li data-step="1" ng-click="showCheckoutStep(1)">Details<span class="chevron"></span></li>
+                      <li data-step="2" ng-click="showCheckoutStep(2)" class="active">Review <span class="chevron"></span></li>
+                    <li data-step="3" ng-click="showCheckoutStep(3)">Payment<span class="chevron"></span></li>
+                  </ul>
+                  <div class="step-content">
+                    <div  data-step="1" class="step-pane active">
+
+
+            <div class="panel panel-primary panel-borders">
+                <div class="panel-heading panel-color"><span class="title">Booking Details</span></div>
+                <div class="panel-body">
+
+                <table class="table table-striped table-fw-widget">
+                  <tbody>
+                    <tr>
+                      <td><strong style="font-family:'roboto' !important;">Contact Details</strong></td>
+                      <td class="number">{{jobDeets.name}} | {{jobDeets.email}} | {{jobDeets.number}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="font-family:'roboto' !important;">Pickup</strong></td>
+                      <td class="number"> {{dashInstant.address.start_location.number}}, {{dashInstant.address.start_location.name.formatted_address}}  </td>
+                    </tr>
+                    <tr>
+                        <td><strong style="font-family:'roboto' !important;">Drop-offs</strong></td>
+                      <td  class="number">
+                        <p ng-repeat="ext in dashInstant.extraDropObj">{{ext.doorNumber}}, {{ext.postcode.formatted_address}}</p>
+                    </tr>
+                    <tr>
+                        <td><strong style="font-family:'roboto' !important;">Date & Time</strong></td>
+                      <td class="number">Delivery on the {{dashInstant.jobDate}} at  {{dashInstant.jobStartTime}}</td>
+                    </tr>
+                      <tr>
+                          <td><strong style="font-family:'roboto' !important;">Van Type</strong></td>
+                      <td class="number"> {{dashInstant.vanType}}</td>
+                    </tr>
+                      <tr>
+                          <td><strong style="font-family:'roboto' !important;">Extra Helper</strong></td>
+                      <td class="number"><div ng-if="dashInstant.extraHelp == false" class="col-md-9 pull-right">
+                                No
+                        </div>
+                        <div ng-if="dashInstant.extraHelp == true" class="col-md-9 pull-right">
+                                Yes
+                        </div></td>
+                    </tr>
+                      <tr>
+                          <td width="30%"><strong style="font-family:'roboto' !important;">Important notes</strong></td>
+                           <td width="70%">
+                           This price is for a ground floor to ground floor service. You will be charged an extra £5 per man per floor if you require loading from another floor. Any property that has an adequately functioning lift will not incur this charge.
+
+
+
+                          </td>
+                    </tr>
+                      
+
+                  </tbody>
+                </table>
+              </div>
+                      </div>
+
+
+                           <div class="panel panel-primary panel-borders">
+                <div class="panel-heading panel-color"><span class="title">Payment Details</span></div>
+                <div class="panel-body">
+
+                <table class="table table-striped table-fw-widget">
+                  <tbody>
+
+                      <tr>
+                          <td><h4><strong style="font-family:'roboto' !important;">Total Due Now</strong></h4></td>
+                      <td class="number"><h2><strong>£{{dashInstant.estiCalc}}.00</stong></h2></td>
+                    </tr>
+
+
+                  </tbody>
+                </table>
+              </div>
+                      </div>
+
+
+
+                      <div class="form-group">
+                          <div class="col-sm-offset-2 col-sm-10">
+
+                              <a><button id="checkout-2-next" ng-click="next2()" class="btn btn-primary btn-space wizard-next pull-right">Next<i class="icon s7-angle-right"></i></button></a>
+                              <a href="/checkout"><button class="btn btn-default btn-space wizard-next pull-right"><i class="icon s7-angle-left"></i>Back</button></a>
+                          </div>
+                        </div>
+                    </div>
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+<!--
+<div class="row wizard-row">
+            <div class="col-md-12 fuelux">
+              <div class="block-wizard panel panel-default">
+                <div id="wizard1" class="wizard wizard-ux">
+                  <ul class="steps">
+                    <li data-step="1" ng-click="showCheckoutStep(1)" >Booking Review<span class="chevron"></span></li>
+                    <li data-step="2" ng-click="showCheckoutStep(2)" class="active">Add Contact Details<span class="chevron"></span></li>
+                    <li data-step="3" ng-click="showCheckoutStep(3)">Payment<span class="chevron"></span></li>
+                  </ul>
+                  <div class="step-content">
+                    <div  data-step="1" class="step-pane active">
+           <div class="col-sm-6">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h3>Pleas Add Contact Details</h3>
+                </div>
+                <div class="panel-body">
+                  <form role="form" data-parsley-validate="" novalidate="" class="form-horizontal">
+                    <div class="form-group">
+                      <label for="inputPassword3" class="col-sm-2 control-label">Name</label>
+                      <div class="col-sm-10">
+                        <input id="inputPassword3" required="" ng-model="dashInstant.name" placeholder="Name" class="form-control">
+                      </div>
+                    </div>
+
+                      <div class="form-group">
+                      <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                      <div class="col-sm-10">
+                        <input id="inputEmail3"  ng-model="dashInstant.email" type="email" required="" parsley-type="email" placeholder="Email" class="form-control">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputPassword3" class="col-sm-2 control-label">Number</label>
+                      <div class="col-sm-10">
+                        <input required=""  ng-model="dashInstant.number" placeholder="Number" class="form-control">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputPassword3" class="col-sm-2 control-label">Extra instructions for driver </label>
+                      <div class="col-sm-10">
+                        <textarea required=""  ng-model="dashInstant.instructions" class="form-control"></textarea>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-sm-offset-2 col-sm-10">
+                        <div class="text-right">
+                          <div class="col-sm-offset-2 col-sm-10">
+                            <button class="btn btn-default btn-space">Go back to booking page</button>
+                            <button  ng-click="back()" class="btn btn-primary btn-space wizard-next"><i class="icon s7-angle-left"></i>Back Step</button>
+                            <button ng-click="next2()" class="btn btn-primary btn-space wizard-next">Next Step <i class="icon s7-angle-right"></i></button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+-->

@@ -1,0 +1,31 @@
+{"jobDetails":
+    {
+    "jobName":"",
+    "vanType":"",
+    "vanName":"",
+    "jobDate":"27-10-1623:55",
+    "jobHoursEsti":"",
+    "extraHelp":false,
+    "estiCalc":24.7,
+    "fuelPrice":null,
+    "duration":3209,
+    "distance":24848,
+    "suggestedPrice":"",
+    "driverNote":"",
+    "address":{
+        "start_location":{
+            "name":"London Rd, Thornton Heath CR7 7YE, UK","number":"55","lat":51.3891287,"lng":-0.10878309999998237},
+        "end_location":{
+            "name":"London E3 3RD, UK","number":"22","lat":51.5197259,"lng":-0.020991500000036467},
+            "pickup1":{"name":"","lat":51.38925580000001,"lng":""},
+            "dropoff1":{"name":"","lat":"","lng":-0.10853259999998954},
+            "pickup2":{"name":"","lat":51.51962020000001,"lng":""},
+            "dropoff2":{"name":"","lat":"","lng":-0.02081939999993665}
+        },
+    "payment_method":"cash",
+    "pk":"",
+    "recieptUrl":"",
+    "status":"",
+    "finalCost":"",
+    "authWindow":"",
+    "deposit":6.175}}
