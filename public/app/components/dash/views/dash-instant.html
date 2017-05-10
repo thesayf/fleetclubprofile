@@ -45,7 +45,7 @@
               -->
               <tr>
                 <td>
-                  <button id="add-inventory-button" ng-init="clickLoadBtn = false" ng-click="clickLoadBtn = true; loadBtnValid = true" data-toggle="modal" data-target="#inv-fullWidth2" type="button" ng-class="loadBtnToggle ? '' : 'disabled' " class=" col-xs-12 btn btn-space btn-success btn-rounded pull-right"><i class="icon icon-left s7-box2"></i> Loading/Waiting Time <span ng-if="clickLoadBtn == true" class="badge badge-primary" >{{dashInstant.loadTimeQty}} Mins</span></button>
+                  <button id="add-inventory-button" ng-init="clickLoadBtn = false" ng-click="clickLoadBtn = true; loadBtnValid = true; changeData();" data-toggle="modal" data-target="#inv-fullWidth2" type="button" ng-class="loadBtnToggle ? '' : 'disabled' " class=" col-xs-12 btn btn-space btn-success btn-rounded pull-right"><i class="icon icon-left s7-box2"></i> Loading/Waiting Time <span ng-if="clickLoadBtn == true" class="badge badge-primary" >{{dashInstant.loadTimeQty}} Mins</span></button>
                 </td>
               </tr>
 
