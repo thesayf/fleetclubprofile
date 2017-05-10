@@ -1,7 +1,56 @@
 var sgHelper = require('sendgrid').mail;
 var sg = require('sendgrid')('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');
+var jwtSecret 	= 'jwtSecretKey';
+var jwt = require('jsonwebtoken');
 
 module.exports = function(app, models, utils, cont, info) {
+
+	app.post('/api/member/process-signup', function(req, res) {
+		cont.func.checkDuplicate(models.User, 'email', req.body.email, function(resp) {
+			if(resp.status == true) {
+				// there's a duplicate
+				cont.func.sendInfo(res, resp.status,
+					{message: 'This Email is already signed up. Login or reset password.'});
+			} else {
+				// No duplicate in mongo so add record
+				cont.func.addRecord(models.User, req.body, function(recordStatus) {
+					var token = jwt.sign(req.body.email, jwtSecret);
+					console.log('tok: '+token);
+					cont.func.sendInfo(res, recordStatus,
+						{data: token, message: 'Account match!.'});
+				})
+			}
+		})
+	})
+
+	app.post('/api/member/process-login', function(req, res) {
+		cont.func.checkDuplicate(models.User, ['email', 'password'], [req.body.email, req.body.password], function(duplicate) {
+			if(duplicate.status == true) {
+				// there's an account match
+				var token = jwt.sign(req.body.email, jwtSecret);
+				cont.func.sendInfo(res, duplicate.status,
+					{data: {data: duplicate.data._id, token: token, message: 'Account match!.'}});
+			} else {
+				// No duplicate in mongo so no account matches
+				cont.func.sendInfo(res, duplicate.status,
+					{message: 'Email does not exist. Signup today!'});
+			}
+		})
+	})
+
+	app.post('/api/member/check-token', function(req, res) {
+		var token = req.body.data;
+		if(token !== false) {
+			var decodedEmail = jwt.verify(token, jwtSecret);
+			if(decodedEmail) {
+				cont.func.sendInfo(res, true, {message: 'authenticated'});
+			} else {
+				cont.func.sendInfo(res, false, {errMessage: 'Invalid'});
+			}
+		} else {
+			cont.func.sendInfo(res, false, {errMessage: 'Invalid'});
+		}
+	});
 
 	// CHARGE CUSTOMER DEPOSIT WITH STRIPE
 	app.post("/api/charge-card", function(req, res) {

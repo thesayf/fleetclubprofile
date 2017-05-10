@@ -1,9 +1,24 @@
 
-
 // Ctrl For Dash
-app.controller('HomeCtrl', function($scope, $localStorage, $location) {
-    $localStorage.vg = {};
-    $homeContact = {};
+app.controller('HomeCtrl', function($scope, $localStorage, $location, authFunc, validation) {
+    if($localStorage.vg == undefined) {
+      $localStorage.vg = {};
+    }
+    $scope.homeContact = {};
+    $scope.signupData = {
+      businessname: '',
+      name: '',
+      email: '',
+      number: '',
+      password: '',
+      passConfirm: ''
+    };
+    $scope.loginData = {};
+
+    $scope.signout = function() {
+      $localStorage.vctoken = '';
+      $location.path('/');
+    }
 
     function getBaseUrl(cb) {
       var re = new RegExp(/^.*\//);
@@ -20,11 +35,56 @@ app.controller('HomeCtrl', function($scope, $localStorage, $location) {
         //console.log('hi');
     }
 
+    $scope.signupSubmit = function() {
+      validation.checkVali($scope.signupData, function(test) {
+        if(test == true) {
+          authFunc.sendSignup($scope.signupData, function(resp) {
+            if(resp.data.success == true) {
+              toastr.info(resp.data.message);
+            } else {
+              // signed up or error
+              $localStorage.vctoken = resp.data.data;
+              $location.path('/dash');
+            }
+          })
+        } else {
+          return false;
+        }
+      })
+
+    }
+
+    $scope.loginSubmit = function() {
+      validation.checkVali($scope.loginData, function(test) {
+        if(test == true) {
+          authFunc.sendLogin($scope.loginData, function(resp) {
+            if(resp.data.success == false) {
+              toastr.info(resp.data.message);
+            } else {
+              // signed up or error
+              $localStorage.vctoken = resp.data.data.token;
+              $location.path('/dash');
+            }
+          })
+        } else {
+          return false;
+        }
+      })
+    }
+
 })
 
 // Ctrl For Dash
-app.controller('DashHomeCtrl', function($scope) {
-    //
+app.controller('DashHomeCtrl', function($scope, $localStorage, $location) {
+  $scope.signout = function() {
+    $localStorage.vctoken = '';
+    $location.path('/');
+    toastr.info('You are now logged out.');
+  }
+})
+
+app.controller('NaviCtrl', function($scope, ) {
+  //
 })
 
 

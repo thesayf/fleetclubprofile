@@ -1,5 +1,7 @@
 app.config(function($routeProvider, $locationProvider, $httpProvider) {
 
+
+
     $routeProvider
 
         .when('/', {
@@ -26,17 +28,17 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
             templateUrl : 'app/components/home/con-web/contact.html',
             controller  : 'HomeCtrl'
         })
-    
+
         .when('/forgotpassword', {
             templateUrl : 'app/components/home/con-web/forgotpassword.html',
             controller  : 'HomeCtrl'
         })
-    
+
     .when('/forgotpasswordcode', {
             templateUrl : 'app/components/home/con-web/forgotpasswordcode.html',
             controller  : 'HomeCtrl'
         })
-    
+
         .when('/faq', {
             templateUrl : 'app/components/home/con-web/faq.html',
             controller  : 'HomeCtrl'
@@ -46,43 +48,49 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
             templateUrl : 'app/components/dash/views/dash-instant.html',
             controller  : 'DashHomeCtrl',
             action      : 'dash-instant',
-            type        : 'dash'
+            type        : 'protected'
         })
 
         .when('/checkout', {
             templateUrl : 'app/components/dash/views/dash-checkout.html',
             controller  : 'CheckoutCtrl',
             //action    : 'dash-allmessages'
+            type        : 'protected'
         })
-    
+
     .when('/bookedjobs', {
             templateUrl : 'app/components/dash/views/bookedjobs.html',
             controller  : 'CheckoutCtrl',
             //action    : 'dash-allmessages'
+            type        : 'protected'
         })
-    
+
     .when('/bookinghistory', {
             templateUrl : 'app/components/dash/views/bookinghistory.html',
             controller  : 'CheckoutCtrl',
             //action    : 'dash-allmessages'
+            type        : 'protected'
         })
-    
+
     .when('/addcard', {
             templateUrl : 'app/components/dash/views/addcard.html',
             controller  : 'CheckoutCtrl',
             //action    : 'dash-allmessages'
+            type        : 'protected'
         })
 
         .when('/checkout-2', {
             templateUrl : 'app/components/dash/views/dash-checkout-2.html',
             controller  : 'CheckoutCtrl',
             //action    : 'dash-allmessages'
+            type        : 'protected'
         })
 
         .when('/checkout-3', {
             templateUrl : 'app/components/dash/views/dash-checkout-3.html',
             controller  : 'CheckoutCtrl',
             //action    : 'dash-allmessages'
+            type        : 'protected'
         })
 
         .when('/about-us', {
@@ -101,12 +109,14 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
             templateUrl : 'app/components/dash/views/booking-complete.html',
             controller  : 'CheckoutCtrl',
             //action    : 'dash-allmessages'
+            type        : 'protected'
         })
 
         .when('/job-form', {
             templateUrl : 'app/components/dash/views/jobform.html',
             controller  : 'CheckoutCtrl',
             //action    : 'dash-allmessages'
+            type        : 'protected'
         })
 
         .when('/404-page', {
@@ -124,32 +134,32 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
 
 });
 
-/*app.run(function($http, $location, $rootScope, $localStorage) {
+app.run(function($http, $localStorage, $log, $location, details, $rootScope) {
+    //$('body').hide();
     $rootScope.$on('$routeChangeSuccess', function (e, current, pre) {
-        var type = current.type;
-        console.log(type);
-
-        if(type !== undefined) {
-            var type = current.type;
-            if(type == 'dash') {
-                var token = $localStorage.token;
-                if(token) {
-                    console.log(token);
-                    $http.post('/api/check-token', {data: token}).then(function(res) {
-                        if(res.data.success == true) {
-                            // verified
-                            console.log('verified');
-                            //details.loggedIn = true;
-                        } else {
-                            //details.loggedIn = false;
-                            $location.path('/login');
-                        }
-                    })
-                } else {
-                    //details.loggedIn = false;
-                    $location.path('/login');
+        if(current.$$route.type) {
+            var type = current.$$route.type;
+            if(type !== undefined) {
+                var type = current.$$route.type;
+                if(type == 'protected') {
+                    var token = $localStorage.vctoken;
+                    if(token) {
+                        $http.post('/api/member/check-token', {data: token}).then(function(res) {
+                            if(res.data.success == true) {
+                                // verified
+                                details.loggedIn = true;
+                            } else {
+                                details.loggedIn = false;
+                                $location.path('/');
+                            }
+                        })
+                    } else {
+                        details.loggedIn = false;
+                        $location.path('/');
+                    }
                 }
             }
         }
+        $('.modal-backdrop').hide();
     })
-})*/
+})

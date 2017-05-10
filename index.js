@@ -71,11 +71,11 @@ var info = {};
 info.gsAPI = process.env.GSAPI;
 
 // DB configuration ============================================================
-//var configDB = require('./config/database.js');
-//mongoose.connect(configDB.url); // connect to our database
+var configDB = require('./config/database.js');
+mongoose.connect(configDB.url); // connect to our database
 
 // Set Port ====================================================================
-app.set('port', (process.env.PORT || 5004));
+app.set('port', (process.env.PORT || 5009));
 
 
 // Need to make sure that the ngfile upload was bing used so just writw this code

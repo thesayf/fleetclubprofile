@@ -12,6 +12,12 @@ app.factory('deets', function() {
     }
 })
 
+app.factory('details', function() {
+    return {
+        loggedIn: false
+    }
+})
+
 app.factory('misc', function() {
     return {
         myBookingsReady: false,
@@ -325,6 +331,24 @@ app.service('hackTools', function() {
     }
 
     return hackTools;
+})
+
+app.service('authFunc', function($http) {
+  var authFunc = {};
+
+  authFunc.sendSignup = function(signup, cb) {
+    $http.post("/api/member/process-signup", signup).then(function(resp){
+        cb(resp);
+    });
+  }
+
+  authFunc.sendLogin = function(login, cb) {
+    $http.post("/api/member/process-login", login).then(function(resp){
+        cb(resp);
+    });
+  }
+
+  return authFunc;
 })
 
 
@@ -661,6 +685,100 @@ app.service('validation', function() {
 
     var validation = {};
 
+    function validateEmail(email, cb) {
+        var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+        cb(re.test(email));
+    }
+
+    function validatePass(pass, cb) {
+        if(pass.length < 6) {
+          cb(false);
+        } else {
+          cb(true);
+        }
+    }
+
+    function validatePhone(phone, cb) {
+        var re = /^(?:(?:\(?(?:0(?:0|11)\)?[\s-]?\(?|\+)44\)?[\s-]?(?:\(?0\)?[\s-]?)?)|(?:\(?0))(?:(?:\d{5}\)?[\s-]?\d{4,5})|(?:\d{4}\)?[\s-]?(?:\d{5}|\d{3}[\s-]?\d{3}))|(?:\d{3}\)?[\s-]?\d{3}[\s-]?\d{3,4})|(?:\d{2}\)?[\s-]?\d{4}[\s-]?\d{4}))(?:[\s-]?(?:x|ext\.?|\#)\d{3,4})?$/i;
+        cb(re.test(phone));
+    }
+
+
+    validation.checkVali = function(obj, cb) {
+      var flag = Object.keys(obj).length;
+      var pass = '';
+      if(flag < 1) {
+        toastr.info('Please fill in the form.');
+        cb(false);
+      } else {
+        $.each(obj, function(key, value) {
+          if(key == 'password' || key == 'passConfirm' || key == 'email' || key == 'number') {
+
+            if(key == 'number') {
+              validatePhone(value, function(test) {
+                if(test == false) {
+                  toastr.info('Please enter a valid number.');
+                } else {
+                  flag--;
+                }
+              })
+            }
+
+            if(key == 'password') {
+              validatePass(value, function(test) {
+                if(test == false) {
+                  toastr.info('Please enter a password with at least 6 characters.');
+                } else {
+                  pass = value;
+                  flag--;
+                }
+              })
+            }
+
+            if(key == 'passConfirm') {
+                if(value !== pass) {
+                  toastr.info('Password & Confirm Password do not match.');
+                } else {
+                  flag--;
+                }
+            }
+
+
+            if(key == 'email') {
+              validateEmail(value, function(test) {
+                if(test == false) {
+                  toastr.info('Please enter a valid email.');
+                } else {
+                  flag--;
+                }
+              })
+            }
+
+
+          } else {
+            if(value.length < 2) {
+              toastr.info('Please input a valid '+key+'.');
+            } else {
+              flag--;
+            }
+          }
+
+
+
+
+
+
+        })
+
+        if(flag > 0) {
+          cb(false);
+        } else {
+          cb(true);
+        }
+
+      }
+    }
+
     validation.checkVal = function(valiOptions, callback) {
         var flag = 0;
 
@@ -799,10 +917,7 @@ app.service('validation', function() {
             return re.test(email);
         }
 
-        function validatePhone(phone) {
-            var re = /^(?:(?:\(?(?:0(?:0|11)\)?[\s-]?\(?|\+)44\)?[\s-]?(?:\(?0\)?[\s-]?)?)|(?:\(?0))(?:(?:\d{5}\)?[\s-]?\d{4,5})|(?:\d{4}\)?[\s-]?(?:\d{5}|\d{3}[\s-]?\d{3}))|(?:\d{3}\)?[\s-]?\d{3}[\s-]?\d{3,4})|(?:\d{2}\)?[\s-]?\d{4}[\s-]?\d{4}))(?:[\s-]?(?:x|ext\.?|\#)\d{3,4})?$/i;
-            return re.test(phone);
-        }
+
 
         function validatePostcode(postcode) {
             // Permitted letters depend upon their position in the postcode.

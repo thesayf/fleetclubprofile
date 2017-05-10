@@ -17,7 +17,7 @@
                     <a class="navbar-brand logo" style="padding-top:0px;" href="index.html">
                         <img style="width:100px;" class="img-responsive" src="/fleet club white.png">
                     </a>
-                    
+
                 </div>
                 <!-- end navbar-header -->
 
@@ -283,11 +283,11 @@
 
 
 
-     
+
         <!-- End Pricing -->
 
 
-      
+
         <!--End  Clients -->
 
 
@@ -366,20 +366,20 @@
 
 <div id="md-default1" tabindex="-1" role="dialog" class="modal fade">
       <div class="modal-dialog">
-        
+
           <div class="modal-body">
             <!--Responsive table-->
            <div class="col-md-12 col-sm-12">
                             <form role="form" class="intro-form">
                                 <h3 class="text-center"> Login </h3>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Email Address" required="required">
+                                    <input ng-model="loginData.email" name="email" type="text" class="form-control" placeholder="Email Address" >
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Password" required="required">
+                                    <input ng-model="loginData.password" name="password" type="text" class="form-control" placeholder="Password" >
                                 </div>
                                 <div class="form-group text-center">
-                                    <button ng-click="dashpage()" type="submit" class="btn btn-custom btn-sm btn-block">Start Now</button>
+                                    <button ng-click="loginSubmit()" class="btn btn-custom btn-sm btn-block">Start Now</button>
                                 </div>
                                 <span class="help-block m-b-0 m-t-20 text-muted"><small>If you have forgotten your password please reset password <a href="/forgotpassword">here</a></small></span>
                             </form>
@@ -391,32 +391,32 @@
 
 <div id="md-default2" tabindex="-1" role="dialog" class="modal fade">
       <div class="modal-dialog">
-        
+
           <div class="modal-body">
             <!--Responsive table-->
            <div class="col-md-12 col-sm-12">
                             <form role="form" class="intro-form">
                                 <h3 class="text-center"> Register for free </h3>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Business Name" required="required">
+                                    <input type="text" ng-model="signupData.businessname" class="form-control" placeholder="Business Name">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Contact Name" required="required">
+                                    <input type="text" ng-model="signupData.name" class="form-control" placeholder="Contact Name">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Email Address" required="required">
+                                    <input type="text" ng-model="signupData.email" class="form-control" placeholder="Email Address">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Contact Number" required="required">
+                                    <input type="text" ng-model="signupData.number" class="form-control" placeholder="Contact Number">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Password" required="required">
+                                    <input type="text" ng-model="signupData.password" class="form-control" placeholder="Password">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Confirm Password" required="required">
+                                    <input type="text" ng-model="signupData.passConfirm" class="form-control" placeholder="Confirm Password">
                                 </div>
                                 <div class="form-group text-center">
-                                    <button ng-click="dashpage()" type="submit" class="btn btn-custom btn-sm btn-block">Start Now</button>
+                                    <button ng-click="signupSubmit()" type="submit" class="btn btn-custom btn-sm btn-block">Start Now</button>
                                 </div>
                                 <span class="help-block m-b-0 m-t-20 text-muted"><small>By registering you agree to the Zodkoo <a href="#">Terms of Use</a></small></span>
                             </form>
@@ -424,5 +424,3 @@
           </div>
         </div>
       </div>
-
-

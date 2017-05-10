@@ -3,6 +3,39 @@ var Quote = require(__dirname + '/../models/quote');
 
 var func = {};
 
+func.checkDuplicate = function(model, field, value, callback) {
+    var query = {};
+    if(typeof(field) == 'object') {
+        for(var i = 0; i < field.length; i++) {
+            query[field[i]] = value[i];
+        }
+    } else {
+        query[field] = value;
+    }
+    model.findOne(query, function(err, duplicate) {
+        if(err) {callback(err);}
+        if(duplicate) {
+            callback({data: duplicate, status: true});
+        } else {
+            callback({data: duplicate, status: false});
+        }
+    })
+}
+
+func.addRecord = function(model, dataObj, callback) {
+    var mod = new model();
+    for (var prop in dataObj) {
+        mod[prop] = dataObj[prop];
+    }
+    mod.save(function(err, user){
+        if(err){
+            callback(false);
+        } else {
+            callback(user);
+        }
+    })
+}
+
 func.getUserFields = function(userID, fields, callback) {
     User.findOne({'_id': userID}, fields, function (err, doc) {
         //console.log(doc);
@@ -128,23 +161,24 @@ func.sendEmail = function(data, utils, cb) {
 }
 
 func.sendInfo = function(res, status, dataObj) {
-    if(dataObj.data) {
+    if(dataObj && dataObj.data) {
         var dataHold = dataObj.data;
     }
     if(status == true) {
         res.json({
-            status: status,
+            success: status,
             message: dataObj.message,
-            data: dataObj.data
+            data: dataHold
         })
     } else {
         res.json({
-            status: status,
+            success: status,
             message: dataObj.message,
-            data: dataObj.data
+            data: dataHold
         })
     }
 }
+
 
 func.userIDByBookingPk = function(bookingPK, callback) {
     Quote.findOne({'pk': bookingPK}, function(err, doc) {
