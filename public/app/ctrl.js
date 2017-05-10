@@ -83,9 +83,6 @@ app.controller('DashHomeCtrl', function($scope, $localStorage, $location) {
   }
 })
 
-app.controller('NaviCtrl', function($scope) {
-  //
-})
 
 
 
