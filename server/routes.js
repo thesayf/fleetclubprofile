@@ -66,7 +66,7 @@ module.exports = function(app, models, utils, cont, info) {
 						// api key https://sendgrid.com/docs/Classroom/Send/api_keys.html
 						var options = {
 							auth: {
-								api_key: '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'
+								api_key: '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'
 							}
 						}
 						var mailer = nodemailer.createTransport(sgTransport(options));
