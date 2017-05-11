@@ -74,7 +74,7 @@ app.controller('HomeCtrl', function($scope, $localStorage, $location, authFunc, 
 
     $scope.forgotPassSubmit = function() {
       authFunc.forgotPassword($scope.forgotEmail, function(resp) {
-        console.log(resp);
+        toastr.info(resp.data.message);
       })
     }
 

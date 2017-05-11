@@ -80,14 +80,18 @@ module.exports = function(app, models, utils, cont, info) {
 
 						mailer.sendMail(email, function(err, res) {
 							if (err) {
-								console.log(err)
+								cont.func.sendInfo(res, true, {message: 'If the account exists it will recieve an email.'});
 							}
-							console.log(res);
+							cont.func.sendInfo(res, true, {message: 'If the account exists it will recieve an email.'});
 						});
 
+					} else {
+						cont.func.sendInfo(res, true, {message: 'If the account exists it will recieve an email.'});
 					}
 
 				})
+			} else {
+				cont.func.sendInfo(res, true, {message: 'If the account exists it will recieve an email.'});
 			}
 		})
 	});
