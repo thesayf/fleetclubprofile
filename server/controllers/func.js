@@ -12,6 +12,7 @@ func.checkDuplicate = function(model, field, value, callback) {
     } else {
         query[field] = value;
     }
+    console.log(query);
     model.findOne(query, function(err, duplicate) {
         if(err) {callback(err);}
         if(duplicate) {
@@ -35,6 +36,22 @@ func.addRecord = function(model, dataObj, callback) {
         }
     })
 }
+
+func.updateRecordByEmail = function(model, update, email, callback) {
+    model.findOne({'email': email}, function(err, doc) {
+      for(key in update) {
+        doc[key] = update[key];
+      }
+      doc.save(function(err) {
+          if(err) {
+              callback(false);
+          } else {
+              callback(true);
+          }
+      })
+    })
+}
+
 
 func.getUserFields = function(userID, fields, callback) {
     User.findOne({'_id': userID}, fields, function (err, doc) {

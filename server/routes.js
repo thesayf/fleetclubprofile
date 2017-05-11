@@ -1,5 +1,5 @@
 var sgHelper = require('sendgrid').mail;
-var sg = require('sendgrid')('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');
+var sg = require('sendgrid')('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');
 var jwtSecret 	= 'jwtSecretKey';
 var jwt = require('jsonwebtoken');
 
@@ -52,6 +52,69 @@ module.exports = function(app, models, utils, cont, info) {
 		}
 	});
 
+	app.post('/api/member/forgot-pass', function(req, res) {
+		cont.func.checkDuplicate(models.User, ['email'], [req.body.email], function(duplicate) {
+			if(duplicate.status == true) {
+				var emailCode = utils.uuid();
+				cont.func.updateRecordByEmail(models.User, {'emailToken': emailCode}, req.body.email, function(status) {
+
+					if(status == true) {
+
+						var nodemailer = require('nodemailer');
+						var sgTransport = require('nodemailer-sendgrid-transport');
+
+						// api key https://sendgrid.com/docs/Classroom/Send/api_keys.html
+						var options = {
+							auth: {
+								api_key: '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'
+							}
+						}
+						var mailer = nodemailer.createTransport(sgTransport(options));
+
+						var email = {
+							to: [req.body.email],
+							from: 'hello@fleetclub.io',
+							subject: 'FleetClub Password Reset',
+							text: 'FleetClub Password Reset\r_________________________________________________________\rFollow the link to reset your password\r\rhttps://fleetalpha.herokuapp.com/forgotpasswordcode?token='+emailCode+''
+						};
+
+						mailer.sendMail(email, function(err, res) {
+							if (err) {
+								console.log(err)
+							}
+							console.log(res);
+						});
+
+					}
+
+				})
+			}
+		})
+	});
+
+	app.post('/api/member/reset-pass', function(req, res) {
+		cont.func.checkDuplicate(models.User, ['emailToken'], [req.body.emailToken], function(duplicate) {
+			if(duplicate.status == true) {
+				mongoData = {
+					selector: 'emailToken',
+					selectorVal: req.body.emailToken,
+					col: models.User,
+					fields: ['password', 'emailToken'],
+					newValues: [req.body.password, '']
+				};
+				cont.func.updateMongoFields(mongoData, function(status) {
+					if(status == true) {
+						cont.func.sendInfo(res, status, {message: 'Password has been reset.'});
+					} else {
+						cont.func.sendInfo(res, status, {message: 'Password has not been reset. Please try again.'})
+					}
+				})
+			} else {
+				cont.func.sendInfo(res, false, {message: 'Could not find account, please reset your password again.'})
+			}
+		})
+	})
+
 	// CHARGE CUSTOMER DEPOSIT WITH STRIPE
 	app.post("/api/charge-card", function(req, res) {
         cont.stripePay.chargeCustomer(req.body.user.deposit, req.body.user.email, req.body.user.name, req.body.stripe.id, function(resp) {
@@ -97,88 +160,11 @@ module.exports = function(app, models, utils, cont, info) {
 		})
 	})
 
-	// CHARGE CUSTOMER DEPOSIT WITH STRIPE
-	app.post("/api/send-email", function(req, res) {
-		req.body.data.msg = 'Vangrab.com Order Reciept\r_________________________________________________________\rThe Most Convenient Way To Move Anything!\r\rWhether you are moving flat or collecting new furniture from Ikea, eBay, Freecycle or Gumtree, the MoversPro web-app is the simplest, cheapest and quickest way to get a driver, on-demand.\r___________________________\rDATE & TIME\r'+req.body.data.jobDate+'\r___________________________\rPICK UP ADDRESS\r'+req.body.data.address.start_location.number+' '+req.body.data.address.start_location.name+'\r___________________________\rDROP OFF ADDRESS';
 
-		req.body.data.msg = req.body.data.msg+'\r'+req.body.data.address.end_location.number+' '+req.body.data.address.end_location.name+'\r___________________________\rEXTRA HELPER\r'+req.body.data.extraHelp+'\r___________________________\rINVENTORY\rSmall Items x '+req.body.data.itemBoxes[0].qty;
-
-		req.body.data.msg = req.body.data.msg+'\rMedium Items x '+req.body.data.itemBoxes[1].qty+'\rLarge Items x '+req.body.data.itemBoxes[2].qty+'\r___________________________\rTOTAL PRICE\r'+req.body.data.estiCalc+'\r___________________________\rDEPOSIT PAID\r'+req.body.data.deposit+'\r\rRefund Policy: A refund can be given at any time before a driver has been dispatched';
-
-		//var sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
-		var request = sg.emptyRequest({
-		  method: 'POST',
-		  path: '/v3/mail/send',
-		  body: {
-		    personalizations: [
-		      {
-		        to: [
-		          {
-		            email: req.body.data.email,
-		          },
-		        ],
-		        subject: 'TheVanClub.io Order Reciept',
-		      },
-		    ],
-		    from: {
-		      email: 'hello@thevanclub.io',
-		    },
-		    content: [
-		      {
-		        type: 'text/plain',
-		        value: req.body.data.msg,
-		      },
-		    ],
-		  },
-		});
-
-
-	//With callback
-	sg.API(request, function(error, response) {
-	  if (error) {
-	    console.log('Error response received');
-	  }
-	  console.log(response.statusCode);
-	  console.log(response.body);
-	  console.log(response.headers);
+	// This shows the main angular index
+	app.get('*', function(req, res) {
+	    res.render('pages/index');
 	});
-
-		//req.body.data.subject = 'Vangrab Order Reciept';
-
-		/*var from_email = new utils.sgHelper.Email('hello@thevanclub.io');
-		var to_email = new utils.sgHelper.Email(req.body.data.email);
-		var subject = 'TheVanClub.io Order Reciept';
-		var content = new utils.sgHelper.Content('text/plain', req.body.data.msg);
-		var mailObj = new utils.sgHelper.Mail(from_email, subject, to_email, content);*/
-
-		/*var request = utils.sg.emptyRequest({
-      method: 'POST',
-      path: '/v3/mail/send',
-      body: emailObj.toJSON(),
-    });
-
-    utils.sg.API(request, function(error, response) {
-        console.log(error);
-      console.log(response.statusCode);
-      console.log(response.body);
-      console.log(response.headers);
-    });*/
-
-        /*cont.func.sendEmail(req.body.data, utils, function(resp) {
-			if(resp == false) {
-				// card declined
-				cont.func.sendInfo(res, false, {message: 'Payment Failed!'})
-			} else {
-				// charge ok
-				cont.func.sendInfo(res, true, {data: resp, message: 'Payment Successful!'})
-			}
-		})*/
-	});
-
-    // This shows the main angular index
-    app.get('*', function(req, res) {
-        res.render('pages/index');
-    });
 
 
 

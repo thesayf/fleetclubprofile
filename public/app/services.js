@@ -44,175 +44,6 @@ app.factory("email", function(){
 });
 
 
-
-app.factory("dashVans", function(){
-    return {
-        0: {
-            vanType: 'Small Van',
-            weight: '660kg',
-            length: '1523m',
-            width: '1473',
-            height: '1181',
-            MPG: '68.2',
-            hourPriceDriver: '15',
-            hourPricePorter: '10',
-            tdID: '5093aff36e77c305510003a5',
-            tdAlias: 'Coupe'
-        },
-        1: {
-            vanType: 'Medium Van',
-            weight: '1114kg',
-            length: '2555',
-            width: '1775',
-            height: '1406',
-            MPG: '40.4',
-            hourPriceDriver: '20',
-            hourPricePorter: '12',
-            tdID: '521258566e77c363f306e803',
-            tdAlias: '4 Seater'
-        },
-        2: {
-            vanType: 'Large Van',
-            weight: '1337kg',
-            length: '3494',
-            width: '1784',
-            height: '2025',
-            MPG: '33.2',
-            hourPriceDriver: '20',
-            hourPricePorter: '12',
-            tdID: '50c612796e77c3380a00dac9',
-            tdAlias: 'MPV 6'
-        },
-        3: {
-            vanType: 'Jumbo Van',
-            weight: '1031kg',
-            length: '4144',
-            width: '1960',
-            height: '2184',
-            MPG: '33.6',
-            hourPriceDriver: '35',
-            hourPricePorter: '12',
-            tdID: '509bb44c6e77c343eb0008d5',
-            tdAlias: 'MPV 5'
-        }
-    };
-});
-
-app.factory("driver", function(){
-    return {
-        username: '',
-        password: '',
-        password2: '',
-        email: '',
-        firstname: '',
-        lastname: '',
-        mobile: '',
-        day: '',
-        month: '',
-        year: '',
-        address: '',
-        city: '',
-        postcode: '',
-        vehicle: '',
-        reg: '',
-        porters: '',
-        vehiclenumber: '',
-        bank: '',
-        acc: '',
-        sc: '',
-        reg: '',
-        make: '',
-        model: '',
-        fuel: '',
-        colour: '',
-        year: '',
-        number: '',
-        city: '',
-        expiry: '',
-    };
-});
-
-app.factory("staff", function(){
-    return {
-        username: '',
-        password: '',
-        password2: '',
-        email: '',
-        firstname: '',
-        lastname: '',
-    };
-});
-
-app.factory("bookings", function(){
-    return{
-        address: {},
-        bookingKey: "",
-        distance: {},
-        driverNote: "",
-        fuelPrice: '',
-        jobDate: "",
-        jobName: "",
-        pk: "",
-        status: "",
-        suggestedPrice: '',
-        userID: "",
-        vanType: "",
-        driverName: "",
-        driverPlate: "",
-        driverColor: "",
-        driverPK: "",
-        driverPhone: "",
-    }
-});
-
-app.factory("currBooking", function(){
-    return{
-        address: {},
-        bookingKey: "",
-        distance: {},
-        driverNote: "",
-        fuelPrice: '',
-        jobDate: "",
-        jobName: "",
-        pk: "",
-        status: "",
-        suggestedPrice: '',
-        userID: "",
-        vanType: "",
-        driverName: "",
-        driverPlate: "",
-        driverColor: "",
-        driverPK: "",
-        driverPhone: "",
-    }
-});
-
-app.factory("algoPrice", function() {
-    var algoPrice = {};
-})
-
-app.factory('items', function() {
-    var items = {};
-
-    items.smItems = {
-        loadTime: 1.5,
-        unloadTime: 1.5,
-        cuFt: 2.5
-    };
-    items.mdItems = {
-        loadTime: 4,
-        unloadTime: 4,
-        cuFt: 20
-    };
-    items.lgItems = {
-        loadTime: 6,
-        unloadTime: 6,
-        cuFt: 50
-    };
-
-    return items;
-})
-
 app.factory('rates', function() {
     return {
         0: {
@@ -274,33 +105,7 @@ app.factory("contractor", function(){
     };
 });
 
-app.factory("user", function(){
-    return {
-        username: '',
-        email: '',
-        firstname: '',
-        lastname: '',
-        mobile: '',
-        cardAdded: 'none'
-    };
-});
 
-app.factory("driverDocs", function(){
-    return {
-        insurance: {},
-        license: {},
-        adressProof: {},
-        savePath: '/uploads/driver/'
-    };
-});
-
-
-app.factory("cardDetails", function(){
-    return {
-        brand: '',
-        last4: '',
-    };
-});
 
 //======================================******END OF FACTORIES******=====================================================//
 
@@ -345,6 +150,18 @@ app.service('authFunc', function($http) {
   authFunc.sendLogin = function(login, cb) {
     $http.post("/api/member/process-login", login).then(function(resp){
         cb(resp);
+    });
+  }
+
+  authFunc.forgotPassword = function(email) {
+    $http.post('/api/member/forgot-pass', {'email': email}).then(function(resp){
+      cb(resp);
+    });
+  }
+
+  authFunc.resetPassword = function(token, pass, cb) {
+    $http.post('/api/member/reset-pass', {emailToken : token, 'password': pass}).then(function(resp){
+      cb(resp);
     });
   }
 
@@ -630,43 +447,6 @@ app.service('maps', function($timeout, $window, routeInfo) {
 })
 
 
-app.service('tdispatch', function($http, dashInstant) {
-    var tdispatch = {};
-    dashInstant.authWindow = '';
-    /*var url = 'http://api.tdispatch.org.uk/passenger/oauth2/auth';
-    var clientID = 'iesgbqOcGs';
-    var secret = 'PeYQRXDWWFAa3WQR7UwHJRs2DZD5eKsP';
-    var apiKey = 'c5c13f4fe1aac89e417c879c0d8554ae';
-    var params1 = {
-        'code': 'Authorization code',
-        'client_id': clientID,
-        'client_secret': secret,
-        'redirect_uri': '',
-        'grant_type': 'authorization_code'
-    }
-    var params2 = {
-        'key': apiKey,
-        'response_type': clientID,
-        'client_id': secret,
-        'redirect_uri': '',
-        'scope': ''
-    }*/
-
-    /*tdispatch.book = function() {
-        $.ajax({
-            url: "/api/tdispatch-book",
-            method: 'GET'
-        }).done(function(data) {
-            dashInstant.authWindow = data.data;
-            var new_window = window.open();
-            $(new_window.document.body).append(dashInstant.authWindow);
-            //window.open("http://api.tdispatch.org.uk/passenger/oauth2/auth","mywindow");
-            //$('#o-auth-window').html(dashInstant.authWindow);
-        });
-    }*/
-
-    return tdispatch;
-})
 
 app.service('swift', function($http) {
     var swift = {};

@@ -15,10 +15,11 @@ var multipartMiddleware     = multipart();
 var fs                      = require('fs-extra');
 var path                    = require('path');
 var jwt                     = require('jsonwebtoken');
-var sgHelper = require('sendgrid').mail;
-var sg = require('sendgrid')('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');
+var sgHelper                = require('sendgrid').mail;
+var sg                      = require('sendgrid')('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');
 var nodemailer              = require('nodemailer');
-
+var uuidV4                  = require('uuid/v4');
+var nodemailer              = require('nodemailer');
 
 var utils = {};
 utils.fs = fs;
@@ -33,6 +34,8 @@ utils.multipart = multipart;
 utils.multipartMiddleware = multipartMiddleware;
 utils.passport = passport;
 utils.localStrategy = localStrategy;
+utils.nodemailer = nodemailer;
+utils.uuid = uuidV4;
 utils.nodemailer = nodemailer;
 
 var Quote       = require(__dirname + '/server/models/quote');

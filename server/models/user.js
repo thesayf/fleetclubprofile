@@ -10,9 +10,9 @@ var userSchema = mongoose.Schema({
     //city: String,
     //postcode: String,
     name: String,
-    number: String
+    number: String,
     //pk: String,
-    //accessToken: String,
+    emailToken: String,
     //refreshToken: String,
     //stripeID: String,
     //cardAdded: String,

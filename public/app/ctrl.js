@@ -1,6 +1,6 @@
 
 // Ctrl For Dash
-app.controller('HomeCtrl', function($scope, $localStorage, $location, authFunc, validation) {
+app.controller('HomeCtrl', function($scope, $localStorage, $location, authFunc, validation, $location) {
     if($localStorage.vg == undefined) {
       $localStorage.vg = {};
     }
@@ -72,6 +72,34 @@ app.controller('HomeCtrl', function($scope, $localStorage, $location, authFunc, 
       })
     }
 
+    $scope.forgotPassSubmit = function() {
+      authFunc.forgotPassword($scope.forgotEmail, function(resp) {
+        console.log(resp);
+      })
+    }
+
+    $scope.resetPassSubmit = function() {
+      $scope.emailToken = $location.search().token;
+      if($scope.emailToken.length > 3) {
+        if($scope.resetPass && $scope.resetPass.length > 5 && $scope.resetPass == $scope.resetPassConfirm) {
+          authFunc.resetPassword($scope.emailToken, $scope.resetPass, function(resp) {
+            if(resp.data.success == true) {
+              toastr.info(resp.data.message);
+              $location.search({});
+              $location.path('/');
+            } else {
+              toastr.info(resp.data.message);
+            }
+          })
+        } else {
+          toastr.info('Your passwords do not match & the password must be at least 6 characters.');
+        }
+      } else {
+        toastr.info('There is an error please try to reset your password again.');
+      }
+
+    }
+
 })
 
 // Ctrl For Dash
@@ -87,7 +115,7 @@ app.controller('DashHomeCtrl', function($scope, $localStorage, $location) {
 
 
 // Ctrl For Dash
-app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, rates, $location, $timeout, $http, swift, $filter, autho) {
+app.controller('DashInstantCtrl', function($scope, maps, $localStorage, rates, $location, $timeout, $http, swift, $filter, autho) {
 
     function idleLogout() {
         var t;
@@ -1135,7 +1163,7 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
         $scope.updateMaps();
     }, 500)
 
-    $scope.$watch('dashInstant.itemBoxes', function(oldValue, newValue) {
+  /*  $scope.$watch('dashInstant.itemBoxes', function(oldValue, newValue) {
         $scope.changeData();
         $scope.loadTime = 0;
         $scope.unloadTime = 0;
@@ -1156,50 +1184,14 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
           //$('.growl').remove();
           $('.cubic-error').addClass('hide');
         }
-    }, true)
+    }, true)*/
 
 })
 
 
 // Ctrl For Navigation
-app.controller('NaviCtrl', function($scope, views, $route, auth, $http, user, infoGrab, bookings, bookingGrab, bookings, email, $location, misc, stripeForm, cardDetails, currBooking, /*dashInstant*/ hackTools, $interval) {
+app.controller('NaviCtrl', function($scope) {
 
-    $scope.views = views;
-    views.currentView = $route.current.action;
-    views.currentType = $route.current.type;
-    views = $scope.views;
-
-    // Grab appRoute.js Action Param
-    $scope.bookings = bookings;
-    $scope.misc = misc;
-    $scope.stripeForm = stripeForm;
-    $scope.cardDetails = cardDetails;
-    $scope.currBooking = currBooking;
-    $scope.email = email;
-    $scope.isEmailSent = '';
-    //$scope.dashInstant = dashInstant;
-    $scope.hackTools = hackTools;
-
-
-    $scope.contactSend = function(){
-        $http.post("/api/contact-send/", {email: $scope.email}).success(function(response){
-            if(response.success == true) {
-                // valid
-                $scope.email.emailAddress = '';
-                $scope.email.subject = '';
-                $scope.email.message = '';
-                $scope.isEmailSent = true;
-                $interval(function(test){
-                    $scope.isEmailSent = false;
-                    $interval.cancel();
-                },5000,0);
-            } else {
-                $scope.isEmailSent = false;
-                toastr.info(response.message);
-            }
-        });
-        //console.log("test to see if email")
-    };
 
 })
 
