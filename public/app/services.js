@@ -153,7 +153,7 @@ app.service('authFunc', function($http) {
     });
   }
 
-  authFunc.forgotPassword = function(email) {
+  authFunc.forgotPassword = function(email, cb) {
     $http.post('/api/member/forgot-pass', {'email': email}).then(function(resp){
       cb(resp);
     });
