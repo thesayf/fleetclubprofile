@@ -73,8 +73,9 @@ app.controller('HomeCtrl', function($scope, $localStorage, $location, authFunc, 
     }
 
     $scope.forgotPassSubmit = function() {
+      toastr.info('If the account exists it will recieve an email.');
       authFunc.forgotPassword($scope.forgotEmail, function(resp) {
-        toastr.info(resp.data.message);
+
       })
     }
 
