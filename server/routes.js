@@ -78,8 +78,8 @@ module.exports = function(app, models, utils, cont, info) {
 							text: 'FleetClub Password Reset\r_________________________________________________________\rFollow the link to reset your password\r\rhttps://fleetalpha.herokuapp.com/forgotpasswordcode?token='+emailCode+''
 						};
 
-						mailer.sendMail(email, function(err, res) {
-							if (err) {
+						mailer.sendMail(email, function(err, resp) {
+							if(err) {
 								cont.func.sendInfo(res, true, {message: 'If the account exists it will recieve an email.'});
 							}
 							cont.func.sendInfo(res, true, {message: 'If the account exists it will recieve an email.'});
