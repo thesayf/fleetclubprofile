@@ -75,7 +75,7 @@ module.exports = function(app, models, utils, cont, info) {
 							to: [req.body.email],
 							from: 'hello@fleetclub.io',
 							subject: 'FleetClub Password Reset',
-							text: 'FleetClub Password Reset\r_________________________________________________________\rFollow the link to reset your password\r\rhttps://fleetalpha.herokuapp.com/forgotpasswordcode?token='+emailCode+''
+							text: 'FleetClub Password Reset\r\r_________________________________________________________\r\rFollow the link to reset your password\r\rhttps://fleetalpha.herokuapp.com/forgotpasswordcode?token='+emailCode+''
 						};
 
 						mailer.sendMail(email, function(err, resp) {
